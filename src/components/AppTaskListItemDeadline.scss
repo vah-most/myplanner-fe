@@ -1,0 +1,13 @@
+.task-due-edit {
+    display: none !important;
+}
+
+.task-due {
+    font-size: 12px !important;
+
+    &:hover {
+        >.task-due-edit {
+            display: block !important;
+        }
+    }
+}

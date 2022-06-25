@@ -1,0 +1,18 @@
+.taskListItemInfo {
+    display: flex;
+    flex-direction: column;
+
+    .taskTitle {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .taskDesc {
+        font-size: 11px;
+    }
+
+    .taskGroups {
+        display: flex;
+        flex-direction: row;
+    }
+}
