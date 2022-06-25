@@ -4,6 +4,7 @@ import taskService from '../services/TaskService';
 
 import AppTable from "./common/AppTable";
 import AppTaskListItemInfo from "./AppTaskListItemInfo";
+import AppTaskListItemGroups from './AppTaskListItemGroups';
 import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from './AppTaskListItemCompleted';
 
@@ -11,7 +12,13 @@ const taskListFields = [
     {
         field: "task",
         title: "Task",
-        size: 6,
+        size: 5,
+        isSortable: true
+    },
+    {
+        field: "groups",
+        title: "Groups",
+        size: 2,
         isSortable: true
     },
     {
@@ -48,6 +55,9 @@ class TaskList extends Component {
             const item = [
                 {
                     render: () => <AppTaskListItemInfo task={task} />
+                },
+                {
+                    render: () => <AppTaskListItemGroups groups={task.groups} />
                 },
                 {
                     render: () => <AppTaskListItemDeadline deadline={task.deadline} />,
