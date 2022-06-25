@@ -2,7 +2,7 @@ const fakeTasks = [
   {
     id: 1,
     title: "Task1",
-    deadline: "2022-06-24 12:00:00",
+    deadline: "2022-06-27 12:00:00",
     isCompleted: false,
     desc: "Desc1 is a quite long task description...",
     groups: [],
@@ -18,7 +18,7 @@ const fakeTasks = [
   {
     id: 3,
     title: "Task3",
-    deadline: "",
+    deadline: "2022-06-28 12:00:00",
     isCompleted: false,
     desc: "Desc3 is a quite long task description...",
     groups: ["Group1", "Group2"],
@@ -34,7 +34,7 @@ const fakeTasks = [
   {
     id: 5,
     title: "Task5",
-    deadline: "",
+    deadline: "2022-07-05 12:00:00",
     isCompleted: false,
     desc: "Desc5 is a quite long task description...",
     groups: ["Group3"],

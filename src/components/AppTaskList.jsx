@@ -40,18 +40,40 @@ const taskListFields = [
 class TaskList extends Component {
 
     state = {
-        tasks: []
+        tasks: [],
+        sortBy: "",
+        sortDirAsc: true
     };
 
     componentDidMount = async () => {
         const tasks = await taskService.getTasks();
-        this.setState({ tasks });
+        const sortBy = "deadline";
+        this.setState({ tasks, sortBy });
+    };
+
+    handleSort = (sortBy, sortDirAsc) => {
+        this.setState({ sortBy, sortDirAsc });
+    };
+
+    sortTasks = (tasks) => {
+        const { sortBy, sortDirAsc } = this.state;
+        tasks.sort((task1, task2) => {
+            if (sortBy === "" || !(sortBy in task1)) return -1;
+            if (task1[sortBy] === null) return sortDirAsc ? 1 : -1;
+            if (task2[sortBy] === null) return sortDirAsc ? -1 : 1;
+            if (task1[sortBy] < task2[sortBy]) return sortDirAsc ? -1 : 1;
+            return sortDirAsc ? 1 : -1;
+        });
+
+        return tasks;
     };
 
     render() {
-        const { tasks } = this.state;
+        const { sortBy, sortDirAsc, tasks } = this.state;
 
-        const data = tasks.map(task => {
+        const finalTasks = this.sortTasks(tasks);
+
+        const data = finalTasks.map(task => {
             const item = [
                 {
                     render: () => <AppTaskListItemInfo task={task} />
@@ -72,7 +94,13 @@ class TaskList extends Component {
         });
 
         return (
-            <AppTable data={data} header={taskListFields} />
+            <AppTable
+                data={data}
+                header={taskListFields}
+                onSort={this.handleSort}
+                sortBy={sortBy}
+                sortDirAsc={sortDirAsc}
+            />
         );
     }
 }
