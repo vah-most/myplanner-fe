@@ -1,0 +1,7 @@
+@mixin transitionBox($prop) {
+    overflow: hidden;
+    -webkit-transition: $prop 0.5s ease-in-out;
+    -moz-transition: $prop 0.5s ease-in-out;
+    -o-transition: $prop 0.5s ease-in-out;
+    transition: $prop 0.5s ease-in-out;
+}

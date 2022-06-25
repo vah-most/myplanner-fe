@@ -1,9 +1,9 @@
 
 import "./AppHeader.scss";
 
-const Header = () => {
+const Header = ({ className }) => {
     return (
-        <div className="header">
+        <div className={`${className} header`}>
             &nbsp;
         </div>
     );

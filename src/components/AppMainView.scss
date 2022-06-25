@@ -1,0 +1,9 @@
+$headerHeight : 50px;
+
+.mainHeader {
+    height: $headerHeight;
+}
+
+.mainTaskList {
+    height: calc(100% - $headerHeight);
+}

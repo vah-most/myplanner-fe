@@ -1,0 +1,15 @@
+@import "../Animations.scss";
+
+.taskEditor {
+    @include transitionBox(width);
+
+    background-color: #EDE8B7;
+    position: relative;
+    border-right: #818487 double 5px;
+
+    .taskEditorCloser {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}

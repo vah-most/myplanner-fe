@@ -17,8 +17,6 @@ export function getRemainingTime(fromTime, toTime) {
     let minutes = Math.floor(delta / 60) % 60;
     delta -= minutes * 60;
 
-    console.log("DUE==>", days, hours, minutes);
-
     if (days > 0)
         return `${passed ? "passed" : "in"} ~${days} day${days > 1 ? "s" : ""} `;
 
