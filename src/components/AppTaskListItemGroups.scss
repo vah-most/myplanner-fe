@@ -1,4 +1,9 @@
 .taskGroups {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.taskGroupsItem {
+  margin: 2px;
 }

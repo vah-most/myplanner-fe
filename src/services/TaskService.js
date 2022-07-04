@@ -1,3 +1,5 @@
+import storageService from "./StorageService";
+
 const fakeTasks = [
   {
     id: 1,
@@ -21,7 +23,7 @@ const fakeTasks = [
     deadline: "2022-06-28 12:00:00",
     isCompleted: false,
     desc: "Desc3 is a quite long task description...",
-    groups: ["Group1", "Group2"],
+    groups: ["Group1", "Group2", "Group3", "Group4", "Group5"],
   },
   {
     id: 4,
@@ -42,10 +44,48 @@ const fakeTasks = [
 ];
 
 class TaskService {
+  storageToken = "tasks";
+
+  tasks = [];
+
+  constructor() {
+    //TODO: load initial tasks
+  }
+
+  saveFakeTasks() {
+    this.tasks = fakeTasks;
+    storageService.setItem(this.storageToken, this.tasks);
+  }
+
   getTasks = async () => {
-    return fakeTasks;
+    this.tasks = storageService.getItem(this.storageToken);
+    return this.tasks;
   };
 
+  generateEmptyTask = () => {
+    return {
+      id: 0,
+      title: "",
+      deadline: "",
+      isCompleted: false,
+      desc: "",
+      groups: [],
+    };
+  };
+
+  setTasks = async (tasks) => {
+    this.tasks = tasks;
+    storageService.setItem(this.storageToken, this.tasks);
+  };
+
+  generateNewTaskId = () => {
+    let maxId = 0;
+    this.tasks.forEach((t) => {
+      if (t.id > maxId) maxId = t.id;
+    });
+
+    return maxId + 1;
+  };
 }
 
 const taskService = new TaskService();
