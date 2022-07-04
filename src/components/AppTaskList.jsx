@@ -13,7 +13,7 @@ import "./AppTaskList.scss";
 
 const taskListFields = [
   {
-    field: "task",
+    field: "title",
     title: "Task",
     size: 5,
     isSortable: true,
@@ -169,7 +169,15 @@ class TaskList extends Component {
       if (sortBy === "" || !(sortBy in task1)) return -1;
       if (task1[sortBy] === null) return sortDirAsc ? 1 : -1;
       if (task2[sortBy] === null) return sortDirAsc ? -1 : 1;
-      if (task1[sortBy] < task2[sortBy]) return sortDirAsc ? -1 : 1;
+      const task1Value =
+        typeof task1[sortBy] === "string"
+          ? task1[sortBy].toLowerCase()
+          : task1[sortBy];
+      const task2Value =
+        typeof task2[sortBy] === "string"
+          ? task2[sortBy].toLowerCase()
+          : task2[sortBy];
+      if (task1Value < task2Value) return sortDirAsc ? -1 : 1;
       return sortDirAsc ? 1 : -1;
     });
 
@@ -188,7 +196,7 @@ class TaskList extends Component {
         className: task.isCompleted ? "completedTaskRow" : "",
         fields: [
           {
-            field: "task",
+            field: "title",
             render: () => <AppTaskListItemInfo task={task} />,
           },
           {
@@ -228,7 +236,7 @@ class TaskList extends Component {
           width="30%"
         />
         <AppTable
-          compactFields={["task", "deadline"]}
+          compactFields={["title", "deadline"]}
           compactMode={editMode}
           data={data}
           header={taskListFields}
