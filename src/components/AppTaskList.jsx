@@ -70,10 +70,11 @@ const taskEditorFields = [
 
 class TaskList extends Component {
   state = {
-    editMode: true,
     editingTask: {},
+    editMode: false,
     sortBy: "",
     sortDirAsc: true,
+    tableRowsPerPage: 5,
     tasks: [],
   };
 
@@ -185,7 +186,14 @@ class TaskList extends Component {
   };
 
   render() {
-    const { editingTask, editMode, sortBy, sortDirAsc, tasks } = this.state;
+    const {
+      editingTask,
+      editMode,
+      sortBy,
+      sortDirAsc,
+      tableRowsPerPage,
+      tasks,
+    } = this.state;
     const { className } = this.props;
 
     const finalTasks = this.sortTasks(tasks);
@@ -245,6 +253,7 @@ class TaskList extends Component {
           onRequestDelete={this.handleRequestDelete}
           onSort={this.handleSort}
           operationsInCompactMode={true}
+          rowsPerPage={tableRowsPerPage}
           sortBy={sortBy}
           sortDirAsc={sortDirAsc}
           style={{ width: editMode ? "70%" : "100%" }}
