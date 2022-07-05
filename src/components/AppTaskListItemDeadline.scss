@@ -1,13 +1,21 @@
+/*
+ * Created on Sat Jun 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
 .task-due-edit {
-    display: none !important;
+  display: none !important;
 }
 
 .task-due {
-    font-size: 12px !important;
+  font-size: 12px !important;
 
-    &:hover {
-        >.task-due-edit {
-            display: block !important;
-        }
+  &:hover {
+    > .task-due-edit {
+      display: block !important;
     }
+  }
 }

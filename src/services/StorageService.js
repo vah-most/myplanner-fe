@@ -1,3 +1,11 @@
+/*
+ * Created on Mon Jul 04 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
 class StorageService {
   setItem(item, value) {
     localStorage.setItem(item, JSON.stringify(value));

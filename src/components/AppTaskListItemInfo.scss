@@ -1,13 +1,21 @@
+/*
+ * Created on Sat Jun 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
 .taskListItemInfo {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    .taskTitle {
-        font-size: 14px;
-        font-weight: bold;
-    }
+  .taskTitle {
+    font-size: 14px;
+    font-weight: bold;
+  }
 
-    .taskDesc {
-        font-size: 11px;
-    }
+  .taskDesc {
+    font-size: 11px;
+  }
 }

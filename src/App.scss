@@ -1,19 +1,27 @@
+/*
+ * Created on Sat Jun 25 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
 html,
 body,
 #root,
 .App {
-    height: 100%;
+  height: 100%;
 }
 
 .fullHeight {
-    height: 100%;
+  height: 100%;
 }
 
 .hand {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .form-check-input:checked {
-    background-color: #198754;
-    border-color: #198754;
+  background-color: #198754;
+  border-color: #198754;
 }
