@@ -6,10 +6,16 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import AppSearchBar from "./common/AppSearchBar";
+
 import "./AppHeader.scss";
 
 const Header = ({ className }) => {
-  return <div className={`${className} header`}>&nbsp;</div>;
+  return (
+    <div className={`${className} header`}>
+      <AppSearchBar />
+    </div>
+  );
 };
 
 export default Header;

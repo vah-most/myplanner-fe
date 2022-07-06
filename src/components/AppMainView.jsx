@@ -7,19 +7,21 @@
  */
 
 import React from "react";
+import { Provider } from "react-redux";
 
+import { store } from "../Store";
 import AppHeader from "./AppHeader";
 import AppTaskList from "./AppTaskList";
 
 import "./AppMainView.scss";
 
-const MainView = () => {
+const AppMainView = () => {
   return (
-    <React.Fragment>
+    <Provider store={store}>
       <AppHeader className="mainHeader" />
       <AppTaskList className="mainTaskList" />
-    </React.Fragment>
+    </Provider>
   );
 };
 
-export default MainView;
+export default AppMainView;

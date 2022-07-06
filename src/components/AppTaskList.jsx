@@ -7,6 +7,7 @@
  */
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import taskService from "../services/TaskService";
 
@@ -76,7 +77,7 @@ const taskEditorFields = [
   },
 ];
 
-class TaskList extends Component {
+class AppTaskList extends Component {
   state = {
     editingTask: {},
     editMode: false,
@@ -171,6 +172,32 @@ class TaskList extends Component {
     this.setState({ tasks, editingTask: task });
   };
 
+  filterTasks = (tasks) => {
+    const searchText = this.props.searchText
+      ? this.props.searchText.toLowerCase()
+      : "";
+
+    const filteredTasks = tasks.filter((t) => {
+      if (
+        typeof t.title === "string" &&
+        t.title.toLowerCase().includes(searchText)
+      )
+        return true;
+      if (
+        typeof t.desc === "string" &&
+        t.desc.toLowerCase().includes(searchText)
+      )
+        return true;
+      for (let group in t.groups) {
+        if (t.groups[group].toLowerCase().includes(searchText)) return true;
+      }
+
+      return false;
+    });
+
+    return filteredTasks;
+  };
+
   sortTasks = (tasks) => {
     const { sortBy, sortDirAsc } = this.state;
 
@@ -204,9 +231,10 @@ class TaskList extends Component {
     } = this.state;
     const { className } = this.props;
 
-    const finalTasks = this.sortTasks(tasks);
+    const filteredTasks = this.filterTasks(tasks);
+    const sortedTasks = this.sortTasks(filteredTasks);
 
-    const data = finalTasks.map((task) => {
+    const data = sortedTasks.map((task) => {
       const item = {
         id: task.id,
         className: task.isCompleted ? "completedTaskRow" : "",
@@ -271,4 +299,8 @@ class TaskList extends Component {
   }
 }
 
-export default TaskList;
+const mapStateToProps = (state) => ({
+  searchText: state.search.value,
+});
+
+export default connect(mapStateToProps)(AppTaskList);
