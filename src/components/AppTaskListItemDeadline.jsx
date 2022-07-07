@@ -49,7 +49,7 @@ const AppTaskListItemDeadline = ({
     <div>
       {due}
       {onTaskDeadlineChange && (
-        <div className="task-due-edit">
+        <div className="taskDueEdit">
           <Datetime
             closeOnSelect={false}
             closeOnClickOutside={true}

@@ -6,11 +6,18 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "./Colors.scss";
+
 html,
 body,
 #root,
 .App {
   height: 100%;
+}
+
+.form-check-input:checked {
+  background-color: $inputCheckedColor;
+  border-color: $inputCheckedColor;
 }
 
 .fullHeight {
@@ -19,9 +26,4 @@ body,
 
 .hand {
   cursor: pointer;
-}
-
-.form-check-input:checked {
-  background-color: #198754;
-  border-color: #198754;
 }

@@ -7,21 +7,18 @@
  */
 
 @import "../Animations.scss";
-
-$editorBGColor: #ffffff;
+@import "../Display.scss";
+@import "../Colors.scss";
 
 .taskEditor {
   @include transitionBox(width);
+  @include flexCenterView(column);
 
   background-color: $editorBGColor;
   position: relative;
   border-right: #818487 double 5px;
   height: 100%;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   overflow: auto;
 
   > div > div {
@@ -30,32 +27,24 @@ $editorBGColor: #ffffff;
 }
 
 .taskEditorFieldsContainer {
-  display: flex;
-  flex-direction: column;
+  @include flexCenterView(column);
+
   width: 90%;
   height: 100%;
-  justify-content: center;
   padding-top: 20px;
-  align-items: center;
   align-self: center;
 }
 
-.titledInputGeneric {
-  width: 100%;
-}
-
 .taskEditorTitle {
+  @include flexCenterView(column);
+
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #060614;
-  color: white;
+  background-color: $editorTitleBGColor;
+  color: $editorTitleColor;
   height: 80px;
   margin-bottom: 50px;
   position: relative;
-  border-top: #ffffff solid 1px;
+  border-top: $editorBGColor solid 1px;
 
   .taskEditorCloser {
     position: absolute;
@@ -68,4 +57,8 @@ $editorBGColor: #ffffff;
       font-size: 16px;
     }
   }
+}
+
+.titledInputGeneric {
+  width: 100%;
 }

@@ -6,16 +6,18 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-.task-due-edit {
-  display: none !important;
-}
+@import "../Texts.scss";
 
-.task-due {
-  font-size: 12px !important;
+.taskDue {
+  @include taskDeadlineTextProps();
 
   &:hover {
-    > .task-due-edit {
+    > .taskDueEdit {
       display: block !important;
     }
   }
+}
+
+.taskDueEdit {
+  display: none !important;
 }

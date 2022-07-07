@@ -6,9 +6,10 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Display.scss";
+
 .taskGroups {
-  display: flex;
-  flex-direction: row;
+  @include flexView(row);
   flex-wrap: wrap;
 }
 

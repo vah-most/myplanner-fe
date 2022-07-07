@@ -6,16 +6,17 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Display.scss";
+@import "../Texts.scss";
+
 .taskListItemInfo {
-  display: flex;
-  flex-direction: column;
+  @include flexView(column);
 
   .taskTitle {
-    font-size: 14px;
-    font-weight: bold;
+    @include taskTitleTextProps();
   }
 
   .taskDesc {
-    font-size: 11px;
+    @include taskDescTextProps();
   }
 }

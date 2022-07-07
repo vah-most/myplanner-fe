@@ -251,7 +251,7 @@ class AppTaskList extends Component {
           {
             field: "deadline",
             render: () => <AppTaskListItemDeadline deadline={task.deadline} />,
-            cellClasses: "text-center task-due align-middle",
+            cellClasses: "text-center align-middle taskDue",
           },
           {
             field: "isCompleted",

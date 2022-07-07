@@ -6,7 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Colors.scss";
+
 .header {
   width: 100%;
-  background-color: #060614;
+  background-color: $headerBGColor;
 }

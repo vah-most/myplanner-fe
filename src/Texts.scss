@@ -1,0 +1,36 @@
+/*
+ * Created on Thu Jul 07 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@mixin addButtonTextProps() {
+  font-size: 11px;
+}
+
+@mixin inputLabelTextProps() {
+  font-size: 12px;
+}
+
+@mixin inputTextProps() {
+  font-size: 12px;
+}
+
+@mixin taskDeadlineTextProps() {
+  font-size: 12px !important;
+}
+
+@mixin taskDescTextProps() {
+  font-size: 11px;
+}
+
+@mixin taskTitleTextProps() {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@mixin textBubbleTextProps() {
+  font-size: 11px;
+}

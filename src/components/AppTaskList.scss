@@ -6,11 +6,13 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-.mainView {
-  display: flex;
-  flex-direction: row;
-}
+@import "../Display.scss";
+@import "../Colors.scss";
 
 .completedTaskRow {
-  background-color: #d1fcd1;
+  background-color: $rowDoneBGColor;
+}
+
+.mainView {
+  @include flexView(row);
 }
