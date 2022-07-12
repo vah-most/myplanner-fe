@@ -173,11 +173,17 @@ class AppTaskList extends Component {
   };
 
   filterTasks = (tasks) => {
+    const hideCompletedTasks = this.props.preferences["hideCompletedTasks"]
+      ? this.props.preferences["hideCompletedTasks"]
+      : false;
+
     const searchText = this.props.searchText
       ? this.props.searchText.toLowerCase()
       : "";
 
     const filteredTasks = tasks.filter((t) => {
+      if (hideCompletedTasks && t.isCompleted) return false;
+
       if (
         typeof t.title === "string" &&
         t.title.toLowerCase().includes(searchText)
@@ -301,6 +307,7 @@ class AppTaskList extends Component {
 
 const mapStateToProps = (state) => ({
   searchText: state.search.value,
+  preferences: state.preferences.value,
 });
 
 export default connect(mapStateToProps)(AppTaskList);

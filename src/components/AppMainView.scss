@@ -6,7 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-$headerHeight: 50px;
+@import "../Sizes.scss";
 
 .mainHeader {
   height: $headerHeight;

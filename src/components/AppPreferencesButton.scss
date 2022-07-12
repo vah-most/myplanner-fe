@@ -1,0 +1,49 @@
+/*
+ * Created on Sat Jul 09 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../animations.scss";
+@import "../Display.scss";
+@import "../Colors.scss";
+@import "../Sizes.scss";
+
+.prefDropDown {
+  left: auto !important;
+  margin-top: 7px;
+  right: 0;
+}
+
+.prefButton {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.prefButtonContainer {
+  @include flexView(row, center, center);
+
+  color: white;
+  height: 100%;
+  margin-left: 10px;
+  padding-top: 2px;
+}
+
+.prefButtonToggle {
+  box-shadow: unset !important;
+}
+
+.prefItemChecked {
+  margin-right: 5px;
+  width: 20px;
+}
+
+.prefItemContainer {
+  @include flexCenterView(row);
+}
+
+.prefItemText {
+  font-size: 12px;
+}

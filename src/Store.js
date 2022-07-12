@@ -7,10 +7,12 @@
  */
 
 import { configureStore } from "@reduxjs/toolkit";
+import preferencesReducer from "./reducers/PreferencesReducer";
 import searchReducer from "./reducers/SearchReducer";
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
+    preferences: preferencesReducer,
   },
 });

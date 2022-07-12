@@ -6,9 +6,13 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Display.scss";
 @import "../Colors.scss";
 
 .header {
-  width: 100%;
   background-color: $headerBGColor;
+}
+
+.headerContainer {
+  @include flexView(row-reverse, end !important, center);
 }
