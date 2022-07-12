@@ -16,3 +16,7 @@
 .mainView {
   @include flexView(row);
 }
+
+.taskTable {
+  margin-left: 10px;
+}

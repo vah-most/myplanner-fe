@@ -286,6 +286,7 @@ class AppTaskList extends Component {
           width="30%"
         />
         <AppTable
+          className="taskTable"
           compactFields={["title", "deadline"]}
           compactMode={editMode}
           data={data}

@@ -12,7 +12,7 @@
 
 .taskEditor {
   @include transitionBox(width);
-  @include flexCenterView(column);
+  @include flexView(column);
 
   background-color: $editorBGColor;
   position: relative;
@@ -27,7 +27,7 @@
 }
 
 .taskEditorFieldsContainer {
-  @include flexCenterView(column);
+  @include flexView(column, start, center);
 
   width: 90%;
   height: 100%;
