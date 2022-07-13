@@ -6,7 +6,35 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "../Animations.scss";
 @import "../Texts.scss";
+@import "../Colors.scss";
+
+.deadlineIcon {
+  margin-right: 4px;
+}
+
+.deadlineIconAlert {
+  @include shaker(2s, infinite, 1s);
+}
+
+.deadlineText {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.deadlineTextAlert {
+  color: $colorAlert;
+}
+
+.deadlineTextOk {
+  color: $colorOk;
+}
+
+.deadlineTextPassed {
+  color: #d37654;
+  text-decoration: line-through;
+}
 
 .taskDue {
   @include taskDeadlineTextProps();

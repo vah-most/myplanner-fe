@@ -6,6 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+$colorAlert: #dc3545;
+$colorOk: #198754;
+
 $editorBGColor: #ffffff;
 $editorTitleBGColor: #060614;
 $editorTitleColor: #ffffff;
@@ -15,11 +18,11 @@ $headerBGColor: #060614;
 $inputLabelColor: #ff0000;
 $inputBGColor: #ffffff;
 
-$inputCheckedColor: #198754;
+$inputCheckedColor: $colorOk;
 
 $rowDoneBGColor: #d1fcd1;
-$rowOperationEditColor: #198754;
-$rowOperationDeleteColor: #cb2f2f;
+$rowOperationEditColor: $colorOk;
+$rowOperationDeleteColor: $colorAlert;
 
 $searchBarBGColor: #ffffff;
 $searchBarIconColor: #808080;

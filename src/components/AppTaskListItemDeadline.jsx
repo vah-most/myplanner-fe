@@ -10,11 +10,10 @@ import React from "react";
 import Datetime from "react-datetime";
 import { now } from "moment";
 
-import { getRemainingTime } from "../utils/utils";
+import { getRemainingDays } from "../utils/utils";
 
 import AppIcon from "./common/AppIcon";
 
-import "font-awesome/css/font-awesome.css";
 import "react-datetime/css/react-datetime.css";
 import "./AppTaskListItemDeadline.scss";
 
@@ -23,11 +22,11 @@ const AppTaskListItemDeadline = ({
   onTaskDeadlineChange,
   taskId,
 }) => {
-  let due = "";
+  let due = null;
   if (deadline) {
     const currTime = now();
     due = new Date(deadline).getTime();
-    due = getRemainingTime(currTime, due);
+    due = getRemainingDays(currTime, due);
   }
 
   const renderTaskDeadlineCalendar = (props, openCalendar, closeCalendar) => {
@@ -45,14 +44,71 @@ const AppTaskListItemDeadline = ({
     );
   };
 
+  const displayDueDays = (due) => {
+    if (due === null) return null;
+
+    let dueTitle = "";
+    const deadlineClassName =
+      "deadlineText " +
+      (due === 0
+        ? "deadlineTextAlert"
+        : due > 0
+        ? "deadlineTextOk"
+        : "deadlineTextPassed");
+    switch (due) {
+      case 1:
+        dueTitle = "Tomorrow";
+        break;
+      case 0:
+        dueTitle = "Today";
+        break;
+      case -1:
+        dueTitle = "Yesterday";
+        break;
+      default:
+        if (due < 0) dueTitle = `Passed ${-due} days`;
+        else dueTitle = `In ${due} days`;
+    }
+
+    return <span className={deadlineClassName}>{dueTitle}</span>;
+  };
+
+  const displayDueIcon = (due) => {
+    if (due === null) return null;
+
+    if (due === 0)
+      return (
+        <AppIcon
+          name="bell"
+          className="deadlineIcon deadlineTextAlert deadlineIconAlert"
+        />
+      );
+
+    if (due < 0)
+      return (
+        <AppIcon
+          name="calendar-times-o"
+          className="deadlineIcon deadlineTextPassed"
+        />
+      );
+
+    return (
+      <AppIcon
+        name="calendar-check-o"
+        className="deadlineIcon deadlineTextOk"
+      />
+    );
+  };
+
   return (
     <div>
-      {due}
+      {displayDueIcon(due)}
+      {displayDueDays(due)}
       {onTaskDeadlineChange && (
         <div className="taskDueEdit">
           <Datetime
-            closeOnSelect={false}
             closeOnClickOutside={true}
+            closeOnSelect={false}
             onChange={(selectedDate) => {
               onTaskDeadlineChange &&
                 onTaskDeadlineChange(taskId, selectedDate);

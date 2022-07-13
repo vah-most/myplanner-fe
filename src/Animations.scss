@@ -6,6 +6,30 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@mixin shaker($duration, $count, $delay) {
+  animation-name: shaker;
+  animation-duration: $duration;
+  animation-iteration-count: $count;
+  animation-delay: $delay;
+}
+
+@keyframes shaker {
+  $shakeSize: 2px;
+
+  10% {
+    transform: translateX($shakeSize);
+  }
+  20% {
+    transform: translateX(-$shakeSize);
+  }
+  30% {
+    transform: translateX($shakeSize);
+  }
+  40% {
+    transform: translateX(0px);
+  }
+}
+
 @mixin transitionBox($prop) {
   overflow: hidden;
   -webkit-transition: $prop 0.5s ease-in-out;
