@@ -75,6 +75,9 @@ const taskEditorFields = [
     name: "groups",
     title: "Groups",
     type: "tag",
+    extraProps: {
+      collection: () => taskService.getAllGroups(),
+    },
   },
 ];
 

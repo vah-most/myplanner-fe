@@ -43,6 +43,7 @@ const AppTaskEditor = ({
               <AppTitledInput
                 key={index}
                 className="titledInputGeneric"
+                extraProps={item.extraProps}
                 onChange={(value) => onChange(task.id, item.name, value)}
                 placeholder={item.title}
                 style={item.style}

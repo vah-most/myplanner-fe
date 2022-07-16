@@ -78,6 +78,19 @@ class TaskService {
     return this.tasks;
   };
 
+  getAllGroups = () => {
+    let groups = new Set();
+
+    this.tasks.forEach((t) => {
+      if (!t.groups) return;
+      t.groups.forEach((g) => {
+        groups.add(g);
+      });
+    });
+
+    return Array.from(groups).sort();
+  };
+
   generateEmptyTask = () => {
     return {
       id: 0,
