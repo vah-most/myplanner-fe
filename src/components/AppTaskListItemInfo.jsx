@@ -16,7 +16,7 @@ function TaskListItemInfo({ task }) {
       <div>
         <span className="taskTitle">{task.title}</span>
       </div>
-      <div>
+      <div className="taskDescContainer">
         <span className="taskDesc">{task.desc}</span>
       </div>
     </div>

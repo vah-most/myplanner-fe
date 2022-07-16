@@ -16,6 +16,10 @@
     @include taskTitleTextProps();
   }
 
+  .taskDescContainer {
+    text-align: justify;
+  }
+
   .taskDesc {
     @include taskDescTextProps();
   }
