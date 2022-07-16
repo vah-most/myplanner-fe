@@ -10,6 +10,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import taskService from "../services/TaskService";
+import { syncStatusChange } from "reducers/SyncReducer";
 
 import AppTable from "./common/AppTable";
 import AppTaskListItemInfo from "./AppTaskListItemInfo";
@@ -88,11 +89,37 @@ class AppTaskList extends Component {
   };
 
   componentDidMount = async () => {
+    document.addEventListener("keydown", this.handleKeyDown, false);
     // await taskService.saveFakeTasks();
 
     const tasks = await taskService.getTasks();
     const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
     this.setState({ tasks, sortBy });
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener("keydown", this.handleKeyDown, false);
+  };
+
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (prevProps.synced === true && this.props.synced === false) {
+      let editingTask = { ...this.state.editingTask };
+      const tasks = await taskService.getTasks();
+      if (editingTask) {
+        editingTask = tasks.find((t) => t.id === editingTask.id);
+        if (!editingTask) editingTask = {};
+      }
+      this.setState({ tasks, editingTask });
+    } else if (prevProps.synced === false && this.props.synced === true) {
+      this.setState({ editMode: false });
+    }
+  };
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      //ESCAPE
+      this.setState({ editMode: false });
+    }
   };
 
   handleRequestAdd = () => {
@@ -124,6 +151,14 @@ class AppTaskList extends Component {
     this.setState({ sortBy, sortDirAsc });
   };
 
+  saveTaskListChanges = (modifiedTasks) => {
+    taskService.setTasks(modifiedTasks);
+
+    this.setState({ tasks: modifiedTasks });
+
+    this.props.syncStatusChange(false);
+  };
+
   handleTaskEdit = (id, name, value) => {
     let { tasks } = this.state;
 
@@ -142,9 +177,9 @@ class AppTaskList extends Component {
       tasks[taskIndex] = { ...task };
     }
 
-    taskService.setTasks(tasks);
+    this.saveTaskListChanges(tasks);
 
-    this.setState({ tasks, editingTask: task });
+    this.setState({ editingTask: task });
   };
 
   handleTaskDelete = (id) => {
@@ -152,8 +187,7 @@ class AppTaskList extends Component {
 
     tasks = tasks.filter((t) => t.id !== id);
 
-    taskService.setTasks(tasks);
-    this.setState({ tasks });
+    this.saveTaskListChanges(tasks);
   };
 
   handleTaskCompleted = (id, value) => {
@@ -167,9 +201,9 @@ class AppTaskList extends Component {
     task.isCompleted = value;
     tasks[taskIndex] = { ...task };
 
-    taskService.setTasks(tasks);
+    this.saveTaskListChanges(tasks);
 
-    this.setState({ tasks, editingTask: task });
+    this.setState({ editingTask: task });
   };
 
   filterTasks = (tasks) => {
@@ -309,6 +343,9 @@ class AppTaskList extends Component {
 const mapStateToProps = (state) => ({
   searchText: state.search.value,
   preferences: state.preferences.value,
+  synced: state.sync.value,
 });
 
-export default connect(mapStateToProps)(AppTaskList);
+const mapDispatchToProps = { syncStatusChange };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppTaskList);

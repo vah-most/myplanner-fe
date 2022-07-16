@@ -19,15 +19,21 @@
 
 .prefButton {
   color: #ffffff;
-  font-size: 20px;
+  font-size: $menuIconSize;
+  &:hover {
+    color: $colorOk;
+    --rotation-degree-start: 90deg !important;
+    --rotation-degree-end: -90deg !important;
+    @include rotater(1s, infinite);
+  }
 }
 
 .prefButtonContainer {
   @include flexView(row, center, center);
 
-  color: white;
+  color: $menuIconColor;
   height: 100%;
-  margin-left: 10px;
+  margin-left: $menuIconSpace;
   padding-top: 2px;
 }
 
@@ -36,7 +42,7 @@
 }
 
 .prefItemChecked {
-  margin-right: 5px;
+  margin-right: $menuIconSpace;
   width: 20px;
 }
 

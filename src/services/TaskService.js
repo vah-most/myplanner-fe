@@ -58,6 +58,15 @@ class TaskService {
 
   constructor() {
     //TODO: load initial tasks
+    this.reloadTasks();
+  }
+
+  reloadTasks() {
+    this.tasks = storageService.getItem(this.storageToken);
+  }
+
+  storeTasks() {
+    storageService.setItem(this.storageToken, this.tasks);
   }
 
   saveFakeTasks() {
@@ -66,7 +75,6 @@ class TaskService {
   }
 
   getTasks = async () => {
-    this.tasks = storageService.getItem(this.storageToken);
     return this.tasks;
   };
 
@@ -83,7 +91,6 @@ class TaskService {
 
   setTasks = async (tasks) => {
     this.tasks = tasks;
-    storageService.setItem(this.storageToken, this.tasks);
   };
 
   generateNewTaskId = () => {

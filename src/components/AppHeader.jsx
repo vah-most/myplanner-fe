@@ -9,16 +9,18 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 
+import AppSyncer from "./AppSyncer";
 import AppSearchBar from "./common/AppSearchBar";
+import AppPreferencesButton from "./AppPreferencesButton";
 
 import "./AppHeader.scss";
-import AppPreferencesButton from "./AppPreferencesButton";
 
 const Header = ({ className }) => {
   return (
     <Navbar className={`header ${className}`} expand="lg">
       <Container className="headerContainer">
         <AppPreferencesButton />
+        <AppSyncer />
         <AppSearchBar />
       </Container>
     </Navbar>

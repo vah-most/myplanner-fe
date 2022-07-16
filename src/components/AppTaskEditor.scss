@@ -27,7 +27,7 @@
 }
 
 .taskEditorFieldsContainer {
-  @include flexView(column, start, center);
+  @include flexView(column, flex-start, center);
 
   width: 90%;
   height: 100%;

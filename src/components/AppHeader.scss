@@ -14,5 +14,5 @@
 }
 
 .headerContainer {
-  @include flexView(row-reverse, end !important, center);
+  @include flexView(row-reverse, flex-start !important, center);
 }

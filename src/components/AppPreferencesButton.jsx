@@ -10,8 +10,8 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
-import AppIcon from "./common/AppIcon";
 import { preferencesChange } from "reducers/PreferencesReducer";
+import AppIcon from "./common/AppIcon";
 
 import "./AppPreferencesButton.scss";
 

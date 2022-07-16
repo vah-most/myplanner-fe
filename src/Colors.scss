@@ -6,27 +6,41 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+//---------------------- PALETTE ---------------------//
+$colorDark: #060614;
+$colorLightGreen: #d1fcd1;
+$colorOrange: #ffa500;
+$colorRed: #ff0000;
+$colorWhite: #ffffff;
+
+//---------------------- GENERIC ---------------------//
 $colorAlert: #dc3545;
+$colorDisabled: #808080;
 $colorOk: #198754;
+$colorPlaceholder: #808080;
 
-$editorBGColor: #ffffff;
-$editorTitleBGColor: #060614;
-$editorTitleColor: #ffffff;
+//---------------------- ITEMS ---------------------//
+$editorBGColor: $colorWhite;
+$editorTitleBGColor: $colorDark;
+$editorTitleColor: $colorWhite;
 
-$headerBGColor: #060614;
+$headerBGColor: $colorDark;
 
-$inputLabelColor: #ff0000;
-$inputBGColor: #ffffff;
+$inputLabelColor: $colorRed;
+$inputBGColor: $colorWhite;
 
 $inputCheckedColor: $colorOk;
 
-$rowDoneBGColor: #d1fcd1;
+$menuIconColor: $colorWhite;
+$menuIconDisabledColor: $colorDisabled;
+
+$rowDoneBGColor: $colorLightGreen;
 $rowOperationEditColor: $colorOk;
 $rowOperationDeleteColor: $colorAlert;
 
-$searchBarBGColor: #ffffff;
-$searchBarIconColor: #808080;
+$searchBarBGColor: $colorWhite;
+$searchBarIconColor: $colorPlaceholder;
 
-$tagAddIconColor: #808080;
+$tagAddIconColor: $colorPlaceholder;
 
-$textBubbleBGColor: #ffa500;
+$textBubbleBGColor: $colorOrange;
