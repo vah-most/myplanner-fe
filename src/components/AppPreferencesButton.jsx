@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { preferencesChange } from "reducers/PreferencesReducer";
 import AppIcon from "./common/AppIcon";
+import AppTooltip from "./common/AppTooltip";
 
 import "./AppPreferencesButton.scss";
 
@@ -32,7 +33,8 @@ const AppPreferencesButton = () => {
         bsPrefix="p-0"
         className="prefButtonToggle"
       >
-        <AppIcon name="cog" className="prefButton" />
+        <AppIcon className="prefButton" id="menu_preferences" name="cog" />
+        <AppTooltip target="menu_preferences">Preferences</AppTooltip>
       </Dropdown.Toggle>
       <Dropdown.Menu className="dropdown-menu prefDropDown">
         <NavDropdown.Item

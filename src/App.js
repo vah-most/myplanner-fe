@@ -6,6 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import { Provider } from "react-redux";
+
+import { store } from "./Store";
 import AppMainView from "./components/AppMainView";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -13,9 +16,11 @@ import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <AppMainView />
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <AppMainView />
+      </div>
+    </Provider>
   );
 }
 

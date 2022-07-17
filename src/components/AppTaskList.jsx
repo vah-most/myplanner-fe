@@ -338,6 +338,7 @@ class AppTaskList extends Component {
           sortDirAsc={sortDirAsc}
           style={{ width: editMode ? "70%" : "100%" }}
         />
+        {this.props.children}
       </div>
     );
   }

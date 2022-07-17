@@ -8,6 +8,8 @@
 
 import React from "react";
 
+import AppTooltip from "./common/AppTooltip";
+
 import "./AppTaskListItemInfo.scss";
 
 function TaskListItemInfo({ task }) {
@@ -17,7 +19,10 @@ function TaskListItemInfo({ task }) {
         <span className="taskTitle">{task.title}</span>
       </div>
       <div className="taskDescContainer">
-        <span className="taskDesc">{task.desc}</span>
+        <span className="taskDesc" id={`task_${task.id}`}>
+          {task.desc}
+        </span>
+        <AppTooltip target={`task_${task.id}`}>{task.desc}</AppTooltip>
       </div>
     </div>
   );

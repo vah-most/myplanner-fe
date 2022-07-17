@@ -13,6 +13,7 @@ import taskService from "services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
 import AppIcon from "./common/AppIcon";
+import AppTooltip from "./common/AppTooltip";
 
 import "./AppSyncer.scss";
 
@@ -45,14 +46,18 @@ const AppSyncer = () => {
     <div className="syncButtonsContainer">
       <AppIcon
         className={revertClassName}
+        id="menu_undo"
         name="undo"
         onClick={handleRevertTasks}
       />
+      <AppTooltip target="menu_undo">Revert to last synced data</AppTooltip>
       <AppIcon
         className={uploadClassName}
         name="upload"
+        id="menu_upload"
         onClick={handleUploadTasks}
       />
+      <AppTooltip target="menu_upload">Upload data to server</AppTooltip>
     </div>
   );
 };

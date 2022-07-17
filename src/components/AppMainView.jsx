@@ -7,9 +7,7 @@
  */
 
 import React from "react";
-import { Provider } from "react-redux";
 
-import { store } from "../Store";
 import AppHeader from "./AppHeader";
 import AppTaskList from "./AppTaskList";
 
@@ -17,10 +15,10 @@ import "./AppMainView.scss";
 
 const AppMainView = () => {
   return (
-    <Provider store={store}>
+    <React.Fragment>
       <AppHeader className="mainHeader" />
       <AppTaskList className="mainTaskList" />
-    </Provider>
+    </React.Fragment>
   );
 };
 
