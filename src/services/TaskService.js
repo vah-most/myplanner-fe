@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import Config from "../Config.json";
+import httpService from "./HttpService";
 import storageService from "./StorageService";
 
 const fakeTasks = [
@@ -53,6 +55,7 @@ const fakeTasks = [
 
 class TaskService {
   storageToken = "tasks";
+  serverAddress = `${Config.APIAddress}/tasks`;
 
   tasks = [];
 
@@ -61,12 +64,22 @@ class TaskService {
     this.reloadTasks();
   }
 
-  reloadTasks() {
-    this.tasks = storageService.getItem(this.storageToken);
+  async reloadTasks() {
+    const result = await httpService.get(this.serverAddress);
+    if (httpService.isOk(result)) {
+      const data = httpService.getData(result);
+      this.tasks = data ? data : [];
+    }
+    storageService.setItem(this.storageToken, this.tasks);
   }
 
-  storeTasks() {
+  async storeTasks() {
     storageService.setItem(this.storageToken, this.tasks);
+    const result = await httpService.post(this.serverAddress, {
+      tasks: this.tasks,
+    });
+
+    return result && result.status && result.status === 200;
   }
 
   saveFakeTasks() {

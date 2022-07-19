@@ -28,17 +28,17 @@ const AppSyncer = () => {
     synced ? "" : "syncIconUnsynced syncIconUnsyncedUpload"
   }`;
 
-  const handleUploadTasks = () => {
+  const handleUploadTasks = async () => {
     if (synced) return null;
 
-    taskService.storeTasks();
+    await taskService.storeTasks();
     dispatch(syncStatusChange(true));
   };
 
-  const handleRevertTasks = () => {
+  const handleRevertTasks = async () => {
     if (synced) return null;
 
-    taskService.reloadTasks();
+    await taskService.reloadTasks();
     dispatch(syncStatusChange(true));
   };
 

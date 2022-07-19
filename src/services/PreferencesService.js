@@ -9,7 +9,7 @@
 const { default: storageService } = require("./StorageService");
 
 const defaultPreferences = {
-  hideCompletedTasks: true,
+  hideCompletedTasks: false,
 };
 
 class PreferencesService {

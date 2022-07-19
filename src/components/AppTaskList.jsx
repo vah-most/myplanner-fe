@@ -115,7 +115,8 @@ class AppTaskList extends Component {
       }
       this.setState({ tasks, editingTask });
     } else if (prevProps.synced === false && this.props.synced === true) {
-      this.setState({ editMode: false });
+      const tasks = await taskService.getTasks();
+      this.setState({ tasks, editMode: false });
     }
   };
 
