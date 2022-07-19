@@ -18,6 +18,7 @@ import AppTaskListItemGroups from "./AppTaskListItemGroups";
 import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
 import AppTaskEditor from "./AppTaskEditor";
+import AppHeader from "./AppHeader";
 
 import "./AppTaskList.scss";
 
@@ -25,7 +26,7 @@ const taskListFields = [
   {
     field: "title",
     title: "Task",
-    size: 5,
+    size: 0,
     isSortable: true,
   },
   {
@@ -87,7 +88,7 @@ class AppTaskList extends Component {
     editMode: false,
     sortBy: "",
     sortDirAsc: true,
-    tableRowsPerPage: 5,
+    tableRowsPerPage: 10,
     tasks: [],
   };
 
@@ -122,6 +123,8 @@ class AppTaskList extends Component {
     if (e.keyCode === 27) {
       //ESCAPE
       this.setState({ editMode: false });
+    } else if (e.keyCode === 113) {
+      this.setState({ editMode: true });
     }
   };
 
@@ -320,24 +323,27 @@ class AppTaskList extends Component {
           onChange={this.handleTaskEdit}
           onClose={this.handleEditorClose}
           task={editingTask}
-          width="30%"
+          width="40%"
         />
-        <AppTable
-          className="taskTable"
-          compactFields={["title", "deadline"]}
-          compactMode={editMode}
-          data={data}
-          header={taskListFields}
-          onRequestAdd={this.handleRequestAdd}
-          onRequestEdit={this.handleRequestEdit}
-          onRequestDelete={this.handleRequestDelete}
-          onSort={this.handleSort}
-          operationsInCompactMode={true}
-          rowsPerPage={tableRowsPerPage}
-          sortBy={sortBy}
-          sortDirAsc={sortDirAsc}
-          style={{ width: editMode ? "70%" : "100%" }}
-        />
+        <div className="taskTableContainer">
+          <AppHeader className="mainHeader" />
+          <AppTable
+            className="taskTable"
+            compactFields={["title", "deadline"]}
+            compactMode={editMode}
+            data={data}
+            header={taskListFields}
+            onRequestAdd={this.handleRequestAdd}
+            onRequestEdit={this.handleRequestEdit}
+            onRequestDelete={this.handleRequestDelete}
+            onSort={this.handleSort}
+            operationsInCompactMode={true}
+            rowsPerPage={tableRowsPerPage}
+            sortBy={sortBy}
+            sortDirAsc={sortDirAsc}
+            style={{ width: editMode ? "99%" : "99%" }}
+          />
+        </div>
         {this.props.children}
       </div>
     );

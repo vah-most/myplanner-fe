@@ -6,11 +6,16 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../Display.scss";
 @import "../Colors.scss";
+@import "../Display.scss";
+@import "../Sizes.scss";
 
 .completedTaskRow {
   background-color: $rowDoneBGColor;
+}
+
+.mainHeader {
+  height: $headerHeight;
 }
 
 .mainView {
@@ -19,4 +24,8 @@
 
 .taskTable {
   margin-left: 10px;
+}
+
+.taskTableContainer {
+  width: 100%;
 }

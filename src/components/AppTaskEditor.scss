@@ -16,7 +16,7 @@
 
   background-color: $editorBGColor;
   position: relative;
-  border-right: #818487 double 5px;
+  border-right: #818487 solid 1px;
   height: 100%;
 
   overflow: auto;
@@ -41,11 +41,10 @@
   width: 100%;
   background-color: $editorTitleBGColor;
   color: $editorTitleColor;
-  height: 80px;
-  min-height: 80px;
+  height: 50px;
+  min-height: 50px;
   margin-bottom: 50px;
   position: relative;
-  border-top: $editorBGColor solid 1px;
 
   .taskEditorCloser {
     position: absolute;

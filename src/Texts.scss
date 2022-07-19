@@ -18,6 +18,11 @@
   font-size: 12px;
 }
 
+@mixin rowIndexTextProps() {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 @mixin taskDeadlineTextProps() {
   font-size: 12px !important;
 }
@@ -28,7 +33,7 @@
 
 @mixin taskTitleTextProps() {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 @mixin textBubbleTextProps() {

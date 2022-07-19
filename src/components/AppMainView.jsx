@@ -16,7 +16,6 @@ import "./AppMainView.scss";
 const AppMainView = () => {
   return (
     <React.Fragment>
-      <AppHeader className="mainHeader" />
       <AppTaskList className="mainTaskList" />
     </React.Fragment>
   );

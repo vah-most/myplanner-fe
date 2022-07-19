@@ -8,6 +8,7 @@
 
 import AppIcon from "./common/AppIcon";
 import AppTitledInput from "./common/AppTitledInput";
+import AppTooltip from "./common/AppTooltip";
 
 import "./AppTaskEditor.scss";
 
@@ -30,9 +31,11 @@ const AppTaskEditor = ({
         <div className="taskEditorCloser">
           <AppIcon
             className="hand taskEditorCloserIcon"
+            id="button_close_editor"
             name="times"
             onClick={onClose}
           />
+          <AppTooltip target="button_close_editor">Close (ESC)</AppTooltip>
         </div>
         <span>{getEditorTitle()}</span>
       </div>

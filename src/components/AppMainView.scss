@@ -8,10 +8,6 @@
 
 @import "../Sizes.scss";
 
-.mainHeader {
-  height: $headerHeight;
-}
-
 .mainTaskList {
   height: calc(100% - $headerHeight);
 }
