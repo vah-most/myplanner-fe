@@ -19,6 +19,7 @@ import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
 import AppTaskEditor from "./AppTaskEditor";
 import AppHeader from "./AppHeader";
+import AppFooter from "./AppFooter";
 
 import "./AppTaskList.scss";
 
@@ -345,6 +346,7 @@ class AppTaskList extends Component {
             sortDirAsc={sortDirAsc}
             style={{ width: editMode ? "99%" : "99%" }}
           />
+          <AppFooter />
         </div>
         {this.props.children}
       </div>

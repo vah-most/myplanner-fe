@@ -24,8 +24,10 @@
 
 .taskTable {
   margin-left: 10px;
+  flex-grow: 1;
 }
 
 .taskTableContainer {
+  @include flexView(column);
   width: 100%;
 }
