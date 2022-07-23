@@ -1,0 +1,22 @@
+/*
+ * Created on Fri Jul 22 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../Animations.scss";
+@import "../Colors.scss";
+@import "../Sizes.scss";
+
+.signoutButton {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: $menuIconSize;
+  padding-left: $menuIconSpace;
+  &:hover {
+    color: $colorAlert;
+    @include shaker(2s, infinite, 0s, x);
+  }
+}

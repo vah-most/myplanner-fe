@@ -50,7 +50,7 @@ const AppTaskEditor = ({
                 onChange={(value) => onChange(task.id, item.name, value)}
                 placeholder={item.title}
                 style={item.style}
-                type={item.type}
+                inputType={item.type}
                 value={task[item.name]}
                 {...item.extra}
               />

@@ -12,13 +12,15 @@ import Navbar from "react-bootstrap/Navbar";
 import AppSyncer from "./AppSyncer";
 import AppSearchBar from "./common/AppSearchBar";
 import AppPreferencesButton from "./AppPreferencesButton";
+import AppLogoutButton from "./AppLogoutButton";
 
 import "./AppHeader.scss";
 
-const Header = ({ className }) => {
+const AppHeader = ({ className }) => {
   return (
     <Navbar className={`header ${className}`} expand="lg">
       <Container className="headerContainer">
+        <AppLogoutButton />
         <AppPreferencesButton />
         <AppSyncer />
         <AppSearchBar />
@@ -27,4 +29,4 @@ const Header = ({ className }) => {
   );
 };
 
-export default Header;
+export default AppHeader;

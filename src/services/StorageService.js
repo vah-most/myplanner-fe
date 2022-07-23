@@ -17,6 +17,10 @@ class StorageService {
 
     return value;
   }
+
+  removeItem(item) {
+    return localStorage.removeItem(item);
+  }
 }
 
 const storageService = new StorageService();

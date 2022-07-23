@@ -96,6 +96,7 @@ class AppTaskList extends Component {
     document.addEventListener("keydown", this.handleKeyDown, false);
     // await taskService.saveFakeTasks();
 
+    await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
     const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
     this.setState({ tasks, sortBy });

@@ -11,6 +11,8 @@ $colorDark: #1a3e2e;
 $colorLightGreen: #d1fcd1;
 $colorShinyGreen: #90ee90;
 $colorWhiteGreen: #f4fff4;
+$colorBlueGreen: #d6e9e0;
+$colorBlue: #0000ff;
 $colorOrange: #ffa500;
 $colorRed: #ff0000;
 $colorWhite: #ffffff;
@@ -22,6 +24,9 @@ $colorOk: #198754;
 $colorPlaceholder: #808080;
 
 //---------------------- ITEMS ---------------------//
+$buttonBGColor: $colorBlue;
+$buttonTextColor: $colorWhite;
+
 $editorBGColor: $colorWhite;
 $editorTitleBGColor: $colorDark;
 $editorTitleColor: $colorWhite;

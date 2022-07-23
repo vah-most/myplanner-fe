@@ -1,0 +1,30 @@
+/*
+ * Created on Wed Jul 20 2022
+ *
+ * Copyright (c) 2022 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../Colors.scss";
+@import "../Display.scss";
+@import "../Sizes.scss";
+
+.loginContainer {
+  width: 400px;
+  background-color: $colorBlueGreen;
+  border: 1px solid $colorDark;
+  border-radius: $boxBorderRadius;
+}
+
+.loginInputLabel {
+  background-color: $colorBlueGreen;
+}
+
+.loginPage {
+  @include flexCenterView(column);
+  width: 100%;
+  height: 100%;
+  /* Background-Image: https://www.toptal.com/designers/subtlepatterns/uploads/gravel.png */
+  background: url("../assets/img/LoginBackground.png");
+}

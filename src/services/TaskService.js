@@ -59,11 +59,6 @@ class TaskService {
 
   tasks = [];
 
-  constructor() {
-    //TODO: load initial tasks
-    this.reloadTasks();
-  }
-
   async reloadTasks() {
     const result = await httpService.get(this.serverAddress);
     if (httpService.isOk(result)) {

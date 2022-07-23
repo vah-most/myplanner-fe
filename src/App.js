@@ -6,22 +6,55 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
 import { Provider } from "react-redux";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { store } from "./Store";
-import AppMainView from "./components/AppMainView";
+import authService from "services/AuthService";
+import AppMainView from "components/AppMainView";
+import AppLoginPage from "components/AppLoginPage";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
 
-function App() {
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <AppMainView />
-      </div>
-    </Provider>
-  );
+class App extends React.Component {
+  state = { user: null, initialized: false };
+
+  componentDidMount() {
+    this.setState({ initialized: true });
+    try {
+      const user = authService.getCurrentUser();
+      this.setState({ user });
+    } catch (error) {
+      this.setState({ user: null });
+    }
+  }
+
+  render() {
+    const { user, initialized } = this.state;
+    if (!initialized) return null;
+
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <div className="App">
+            {user ? (
+              <Routes>
+                <Route path="/" index element={<AppMainView user={user} />} />;
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            ) : (
+              <Routes>
+                <Route path="/login" element={<AppLoginPage />} />
+                <Route path="*" element={<Navigate to="/login" />} />
+              </Routes>
+            )}
+          </div>
+        </BrowserRouter>
+      </Provider>
+    );
+  }
 }
 
 export default App;
