@@ -6,10 +6,10 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "./animations";
-@import "./Display";
-@import "./Colors";
-@import "./Sizes";
+@import "../Animations.scss";
+@import "../Display.scss";
+@import "../Colors.scss";
+@import "../Sizes.scss";
 
 .prefDropDown {
   left: auto !important;
