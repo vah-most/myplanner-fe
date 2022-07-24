@@ -6,9 +6,12 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import React from "react";
+
 import authService from "services/AuthService";
 
 import AppIcon from "./common/AppIcon";
+import AppTooltip from "./common/AppTooltip";
 
 import "./AppLogoutButton.scss";
 
@@ -19,7 +22,15 @@ const AppLogoutButton = () => {
   };
 
   return (
-    <AppIcon className="signoutButton" name="sign-out" onClick={doLogout} />
+    <React.Fragment>
+      <AppIcon
+        className="signoutButton"
+        id="menu_logout"
+        name="sign-out"
+        onClick={doLogout}
+      />
+      <AppTooltip target="menu_logout">Logout from account</AppTooltip>
+    </React.Fragment>
   );
 };
 
