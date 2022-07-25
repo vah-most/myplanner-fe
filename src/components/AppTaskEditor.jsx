@@ -13,20 +13,21 @@ import AppTooltip from "./common/AppTooltip";
 import "./AppTaskEditor.scss";
 
 const AppTaskEditor = ({
+  className,
   fields,
   hide = true,
   onChange,
   onClose,
   task,
-  width = "100%",
 }) => {
   const getEditorTitle = () => {
     if (task.id > 0) return "Modify Task";
     return task.title ? task.title : "New Task";
   };
 
+  const hidingStyle = hide ? { width: "0%" } : null;
   return (
-    <div className="taskEditor" style={{ width: hide ? "0%" : width }}>
+    <div className={`taskEditor ${className}`} style={hidingStyle}>
       <div className="taskEditorTitle">
         <div className="taskEditorCloser">
           <AppIcon

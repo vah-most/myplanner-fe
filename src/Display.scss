@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+$minNormalWidth: 768px;
+
 @mixin flexView($dir: row, $justifyContent: unset, $alignItems: unset) {
   display: flex;
   flex-direction: $dir;

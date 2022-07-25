@@ -100,7 +100,10 @@ class AppTaskList extends Component {
     await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
     const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
-    this.setState({ tasks, sortBy });
+    this.setState({
+      tasks,
+      sortBy,
+    });
   };
 
   componentWillUnmount = () => {
@@ -321,14 +324,18 @@ class AppTaskList extends Component {
     return (
       <div className={`${className} mainView`}>
         <AppTaskEditor
+          className="taskEditorView"
           fields={taskEditorFields}
           hide={!editMode}
           onChange={this.handleTaskEdit}
           onClose={this.handleEditorClose}
           task={editingTask}
-          width="40%"
         />
-        <div className="taskTableContainer">
+        <div
+          className={
+            editMode ? "taskTableContainerEditMode" : "taskTableContainer"
+          }
+        >
           <AppHeader className="mainHeader" />
           <AppTable
             className="taskTable"
@@ -344,7 +351,6 @@ class AppTaskList extends Component {
             rowsPerPage={tableRowsPerPage}
             sortBy={sortBy}
             sortDirAsc={sortDirAsc}
-            style={{ width: editMode ? "99%" : "99%" }}
           />
           <AppFooter />
         </div>

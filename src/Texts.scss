@@ -6,36 +6,57 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "./Display.scss";
+
+:root {
+  --font-size-small: 11px;
+  --font-size-normal: 12px;
+  --font-size-big: 14px;
+}
+
+@media (max-width: $minNormalWidth) {
+  :root {
+    --font-size-small: 8px;
+    --font-size-normal: 9px;
+    --font-size-big: 10px;
+  }
+}
+
 @mixin addButtonTextProps() {
-  font-size: 11px;
+  font-size: var(--font-size-small);
 }
 
 @mixin inputLabelTextProps() {
-  font-size: 12px;
+  font-size: var(--font-size-normal);
 }
 
 @mixin inputTextProps() {
-  font-size: 12px;
+  font-size: var(--font-size-normal);
 }
 
 @mixin rowIndexTextProps() {
-  font-size: 14px;
+  font-size: var(--font-size-big);
   font-weight: 600;
 }
 
 @mixin taskDeadlineTextProps() {
-  font-size: 12px !important;
+  font-size: var(--font-size-normal) !important;
 }
 
 @mixin taskDescTextProps() {
-  font-size: 11px;
+  font-size: var(--font-size-small);
+}
+
+@mixin taskTableHeader() {
+  font-size: var(--font-size-big);
+  font-weight: 700;
 }
 
 @mixin taskTitleTextProps() {
-  font-size: 14px;
+  font-size: var(--font-size-big);
   font-weight: 600;
 }
 
 @mixin textBubbleTextProps() {
-  font-size: 11px;
+  font-size: var(--font-size-small);
 }

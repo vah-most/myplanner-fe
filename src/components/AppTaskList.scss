@@ -22,12 +22,28 @@
   @include flexView(row);
 }
 
+.taskEditorView {
+  width: 40%;
+}
+
 .taskTable {
   margin-left: 10px;
   flex-grow: 1;
+  width: 99%;
 }
 
-.taskTableContainer {
+.taskTableContainer,
+.taskTableContainerEditMode {
   @include flexView(column);
   width: 100%;
+}
+
+@media (max-width: $minNormalWidth) {
+  .taskEditorView {
+    width: 100%;
+  }
+
+  .taskTableContainerEditMode {
+    display: none;
+  }
 }
