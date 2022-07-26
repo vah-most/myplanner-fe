@@ -6,6 +6,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "./Colors.scss";
 @import "./Display.scss";
 
 :root {
@@ -24,6 +25,19 @@
 
 @mixin addButtonTextProps() {
   font-size: var(--font-size-small);
+}
+
+@mixin formInputErrorTextProps() {
+  font-size: var(--font-size-normal);
+  color: $colorAlert;
+}
+
+@mixin formInputLabelTextProps() {
+  font-size: var(--font-size-big);
+}
+
+@mixin formInputTextProps() {
+  font-size: var(--font-size-normal);
 }
 
 @mixin inputLabelTextProps() {

@@ -24,7 +24,7 @@ class HttpService {
       if (!expectedError) {
         //TODO: Notify user of Error
       } else if (error.response && error.response.status === 440) {
-        onAuthError();
+        onAuthError(error.response);
         window.location = "/";
       }
 

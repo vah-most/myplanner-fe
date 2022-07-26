@@ -17,7 +17,7 @@ class AuthService {
   loginJwtToken = "token";
 
   constructor() {
-    httpService.initAuth(this.logout);
+    httpService.initAuth(this.handleAuthError);
     httpService.setAuthKey(this.getAuthKey());
   }
 
@@ -31,16 +31,29 @@ class AuthService {
   }
 
   async login(username, password) {
+    const response = await httpService.post(this.authAPIEndpoint, {
+      username: username,
+      password: password,
+    });
+    if (response.status !== 200 || !response.data) throw response;
+
     const { data: jwt } = await httpService.post(this.authAPIEndpoint, {
       username: username,
       password: password,
     });
-
     storageService.setItem(this.loginJwtToken, jwt);
+
+    return true;
   }
+
   logout() {
     storageService.removeItem(this.loginJwtToken);
   }
+
+  handleAuthError = (error) => {
+    if (storageService.getItem(this.loginJwtToken)) this.logout();
+    throw error;
+  };
 }
 
 const authService = new AuthService();

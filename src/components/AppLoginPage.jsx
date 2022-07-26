@@ -29,6 +29,7 @@ const loginInputs = [
 
 class AppLogin extends Component {
   state = {
+    errors: {},
     values: {
       username: "",
       password: "",
@@ -42,26 +43,42 @@ class AppLogin extends Component {
     this.setState({ values });
   };
 
+  handleSubmitError = (error) => {
+    const { values } = this.state;
+    let errors = {};
+    const genericError = "Failed to login to server.";
+    if (!error || !error.data) {
+      errors.username = genericError;
+    } else {
+      const parts = error.data.split(":");
+      if (parts.length === 2 && parts[0] in values) {
+        errors[parts[0]] = parts[1];
+      } else {
+        errors.username = genericError;
+      }
+    }
+    this.setState({ errors });
+  };
+
   handleSubmit = async () => {
     const { username, password } = this.state.values;
     try {
       const hiddenPassword = MD5(password).toString();
       await authService.login(username, hiddenPassword);
       window.location = "/";
-    } catch (ex) {
-      if (ex.response && ex.response.status === 400) {
-        this.handleSubmitError(ex.response.data);
-      }
+    } catch (error) {
+      this.handleSubmitError(error);
     }
   };
 
   render() {
-    const { values } = this.state;
+    const { errors, values } = this.state;
 
     return (
       <div className="loginPage">
         <div className="loginContainer">
           <AppForm
+            errors={errors}
             inputLabelClassName="loginInputLabel"
             inputs={loginInputs}
             onChange={this.handleChange}
