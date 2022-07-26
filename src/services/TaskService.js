@@ -6,52 +6,11 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import CryptoJS from "crypto-js";
+
 import Config from "../Config.json";
 import httpService from "./HttpService";
 import storageService from "./StorageService";
-
-const fakeTasks = [
-  {
-    id: 1,
-    title: "Task1",
-    deadline: "2022-06-27 12:00:00",
-    isCompleted: false,
-    desc: "Desc1 is a quite long task description...",
-    groups: [],
-  },
-  {
-    id: 2,
-    title: "Task2",
-    deadline: "",
-    isCompleted: true,
-    desc: "Desc2 is a quite long task description...",
-    groups: ["Group1"],
-  },
-  {
-    id: 3,
-    title: "Task3",
-    deadline: "2022-06-28 12:00:00",
-    isCompleted: false,
-    desc: "Desc3 is a quite long task description...",
-    groups: ["Group1", "Group2", "Group3", "Group4", "Group5"],
-  },
-  {
-    id: 4,
-    title: "Task4",
-    deadline: "",
-    isCompleted: true,
-    desc: "",
-    groups: ["Group3"],
-  },
-  {
-    id: 5,
-    title: "Task5",
-    deadline: "2022-07-05 12:00:00",
-    isCompleted: false,
-    desc: "Desc5 is a quite long task description...",
-    groups: ["Group3"],
-  },
-];
 
 class TaskService {
   storageToken = "tasks";
@@ -77,11 +36,6 @@ class TaskService {
     return result && result.status && result.status === 200;
   }
 
-  saveFakeTasks() {
-    this.tasks = fakeTasks;
-    storageService.setItem(this.storageToken, this.tasks);
-  }
-
   getTasks = async () => {
     return this.tasks;
   };
@@ -100,27 +54,51 @@ class TaskService {
   };
 
   generateEmptyTask = () => {
-    return {
-      id: 0,
+    let task = {
+      _id: null,
       title: "",
       deadline: "",
       isCompleted: false,
       desc: "",
       groups: [],
     };
+
+    const newTaskPrefix = "New Task";
+    const defaultTasks = this.tasks.filter((t) =>
+      t.title.startsWith(newTaskPrefix)
+    );
+
+    let index = 1;
+    do {
+      task.title = newTaskPrefix + (index > 1 ? ` ${index}` : "");
+      index++;
+    } while (defaultTasks.find((t) => t.title === task.title));
+
+    return task;
   };
 
   setTasks = async (tasks) => {
     this.tasks = tasks;
   };
-
   generateNewTaskId = () => {
-    let maxId = 0;
-    this.tasks.forEach((t) => {
-      if (t.id > maxId) maxId = t.id;
-    });
+    let taskId = 0;
 
-    return maxId + 1;
+    const foundTaskId = (taskId) => {
+      return this.tasks.find((t) => t._id === taskId);
+    };
+
+    do {
+      taskId = CryptoJS.lib.WordArray.random(16).toString().substring(0, 24);
+    } while (foundTaskId(taskId));
+
+    return taskId;
+  };
+
+  checkTaskErrors = (task) => {
+    if (!task.title || task.title.length === 0)
+      return { title: "Please set title first." };
+
+    return null;
   };
 }
 

@@ -22,6 +22,7 @@ $colorWhite: #ffffff;
 //---------------------- GENERIC ---------------------//
 $colorAlert: #dc3545;
 $colorDisabled: #808080;
+$colorError: $colorRed;
 $colorOk: #198754;
 $colorPlaceholder: #808080;
 
@@ -41,6 +42,7 @@ $headerBGColor: $colorDark;
 
 $inputLabelColor: $colorDarkBlue;
 $inputBGColor: $colorWhite;
+$inputFocusBorder: $colorDark;
 
 $inputCheckedColor: $colorOk;
 

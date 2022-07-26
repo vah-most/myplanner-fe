@@ -44,6 +44,11 @@
   font-size: var(--font-size-normal);
 }
 
+@mixin inputErrorProps() {
+  font-size: var(--font-size-small);
+  color: $colorRed;
+}
+
 @mixin inputTextProps() {
   font-size: var(--font-size-normal);
 }

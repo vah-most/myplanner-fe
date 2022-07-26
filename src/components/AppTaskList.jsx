@@ -9,6 +9,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { KEY_CODES } from "utils/utils";
 import taskService from "../services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
@@ -86,6 +87,7 @@ const taskEditorFields = [
 class AppTaskList extends Component {
   state = {
     editingTask: {},
+    editingTaskErrors: {},
     editMode: false,
     sortBy: "",
     sortDirAsc: true,
@@ -95,7 +97,6 @@ class AppTaskList extends Component {
 
   componentDidMount = async () => {
     document.addEventListener("keydown", this.handleKeyDown, false);
-    // await taskService.saveFakeTasks();
 
     await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
@@ -103,6 +104,7 @@ class AppTaskList extends Component {
     this.setState({
       tasks,
       sortBy,
+      editingTask: { ...taskService.generateEmptyTask() },
     });
   };
 
@@ -115,7 +117,7 @@ class AppTaskList extends Component {
       let editingTask = { ...this.state.editingTask };
       const tasks = await taskService.getTasks();
       if (editingTask) {
-        editingTask = tasks.find((t) => t.id === editingTask.id);
+        editingTask = tasks.find((t) => t._id === editingTask._id);
         if (!editingTask) editingTask = {};
       }
       this.setState({ tasks, editingTask });
@@ -126,25 +128,25 @@ class AppTaskList extends Component {
   };
 
   handleKeyDown = (e) => {
-    if (e.keyCode === 27) {
-      //ESCAPE
+    if (e.keyCode === KEY_CODES.KEY_ESCAPE) {
       this.setState({ editMode: false });
-    } else if (e.keyCode === 113) {
-      this.setState({ editMode: true });
+    } else if (e.keyCode === KEY_CODES.KEY_F2) {
+      if (!this.state.editMode) this.handleRequestAdd();
     }
   };
 
   handleRequestAdd = () => {
     this.setState({
       editMode: true,
-      editingTask: taskService.generateEmptyTask(),
+      editingTask: { ...taskService.generateEmptyTask() },
+      editingTaskErrors: {},
     });
   };
 
   handleRequestEdit = (id) => {
     const { tasks } = this.state;
 
-    let editingTask = tasks.find((t) => t.id === id);
+    let editingTask = tasks.find((t) => t._id === id);
     if (editingTask) {
       editingTask = { ...editingTask };
       this.setState({ editMode: true, editingTask });
@@ -174,14 +176,19 @@ class AppTaskList extends Component {
   handleTaskEdit = (id, name, value) => {
     let { tasks } = this.state;
 
-    const taskIndex = tasks.findIndex((t) => t.id === id);
+    const taskIndex = tasks.findIndex((t) => t._id === id);
     tasks = [...tasks];
 
     let task = null;
     if (taskIndex < 0) {
       task = taskService.generateEmptyTask();
-      task.id = taskService.generateNewTaskId();
+      task._id = taskService.generateNewTaskId();
       task[name] = value;
+      const taskErrors = taskService.checkTaskErrors(task);
+      if (taskErrors !== null) {
+        this.setState({ editingTask: task, editingTaskErrors: taskErrors });
+        return;
+      }
       tasks.push({ ...task });
     } else {
       task = { ...tasks[taskIndex] };
@@ -197,14 +204,14 @@ class AppTaskList extends Component {
   handleTaskDelete = (id) => {
     let tasks = [...this.state.tasks];
 
-    tasks = tasks.filter((t) => t.id !== id);
+    tasks = tasks.filter((t) => t._id !== id);
 
     this.saveTaskListChanges(tasks);
   };
 
   handleTaskCompleted = (id, value) => {
     let { tasks } = this.state;
-    const taskIndex = tasks.findIndex((t) => t.id === id);
+    const taskIndex = tasks.findIndex((t) => t._id === id);
     tasks = [...tasks];
 
     if (taskIndex < 0) return;
@@ -275,6 +282,7 @@ class AppTaskList extends Component {
   render() {
     const {
       editingTask,
+      editingTaskErrors,
       editMode,
       sortBy,
       sortDirAsc,
@@ -288,7 +296,7 @@ class AppTaskList extends Component {
 
     const data = sortedTasks.map((task) => {
       const item = {
-        id: task.id,
+        id: task._id,
         className: task.isCompleted ? "completedTaskRow" : "",
         fields: [
           {
@@ -309,7 +317,7 @@ class AppTaskList extends Component {
             field: "isCompleted",
             render: () => (
               <AppTaskListItemCompleted
-                taskId={task.id}
+                taskId={task._id}
                 value={task.isCompleted}
                 onChange={this.handleTaskCompleted}
               />
@@ -330,6 +338,7 @@ class AppTaskList extends Component {
           onChange={this.handleTaskEdit}
           onClose={this.handleEditorClose}
           task={editingTask}
+          taskErrors={editingTaskErrors}
         />
         <div
           className={

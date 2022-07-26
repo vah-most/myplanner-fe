@@ -11,3 +11,8 @@ export function getRemainingDays(fromTime, toTime) {
 
   return diff;
 }
+
+export const KEY_CODES = {
+  KEY_ESCAPE: 27,
+  KEY_F2: 113,
+};

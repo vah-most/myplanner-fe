@@ -19,6 +19,7 @@ const AppTaskEditor = ({
   onChange,
   onClose,
   task,
+  taskErrors = {},
 }) => {
   const getEditorTitle = () => {
     if (task.id > 0) return "Modify Task";
@@ -47,8 +48,9 @@ const AppTaskEditor = ({
               <AppTitledInput
                 key={index}
                 className="titledInputGeneric"
+                error={item.name in taskErrors ? taskErrors[item.name] : null}
                 extraProps={item.extraProps}
-                onChange={(value) => onChange(task.id, item.name, value)}
+                onChange={(value) => onChange(task._id, item.name, value)}
                 placeholder={item.title}
                 style={item.style}
                 inputType={item.type}
