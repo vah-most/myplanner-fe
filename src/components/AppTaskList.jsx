@@ -181,24 +181,28 @@ class AppTaskList extends Component {
 
     let task = null;
     if (taskIndex < 0) {
-      task = taskService.generateEmptyTask();
+      task = { ...taskService.generateEmptyTask() };
       task._id = taskService.generateNewTaskId();
-      task[name] = value;
-      const taskErrors = taskService.checkTaskErrors(task);
-      if (taskErrors !== null) {
-        this.setState({ editingTask: task, editingTaskErrors: taskErrors });
-        return;
-      }
-      tasks.push({ ...task });
     } else {
       task = { ...tasks[taskIndex] };
-      task[name] = value;
+    }
+    task[name] = value;
+
+    const taskErrors = taskService.checkTaskErrors(task);
+    if (taskErrors !== null) {
+      this.setState({ editingTask: task, editingTaskErrors: taskErrors });
+      return;
+    }
+
+    if (taskIndex < 0) {
+      tasks.push({ ...task });
+    } else {
       tasks[taskIndex] = { ...task };
     }
 
     this.saveTaskListChanges(tasks);
 
-    this.setState({ editingTask: task });
+    this.setState({ editingTask: task, editingTaskErrors: {} });
   };
 
   handleTaskDelete = (id) => {
