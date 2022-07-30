@@ -173,6 +173,33 @@ class AppTaskList extends Component {
     this.props.syncStatusChange(false);
   };
 
+  saveTask = (task) => {
+    let { tasks } = this.state;
+    const taskIndex = task._id
+      ? tasks.findIndex((t) => t._id === task._id)
+      : null;
+
+    if (taskIndex === null) task._id = taskService.generateNewTaskId();
+
+    const taskErrors = taskService.checkTaskErrors(task);
+    if (taskErrors !== null) {
+      this.setState({ editingTask: task, editingTaskErrors: taskErrors });
+      return false;
+    }
+
+    if (taskIndex === null || taskIndex < 0) {
+      tasks.push({ ...task });
+    } else {
+      tasks[taskIndex] = { ...task };
+    }
+
+    this.saveTaskListChanges(tasks);
+
+    this.setState({ editingTask: task, editingTaskErrors: {} });
+
+    return true;
+  };
+
   handleTaskEdit = (id, name, value) => {
     let { tasks } = this.state;
 
@@ -182,27 +209,12 @@ class AppTaskList extends Component {
     let task = null;
     if (taskIndex < 0) {
       task = { ...taskService.generateEmptyTask() };
-      task._id = taskService.generateNewTaskId();
     } else {
       task = { ...tasks[taskIndex] };
     }
     task[name] = value;
 
-    const taskErrors = taskService.checkTaskErrors(task);
-    if (taskErrors !== null) {
-      this.setState({ editingTask: task, editingTaskErrors: taskErrors });
-      return;
-    }
-
-    if (taskIndex < 0) {
-      tasks.push({ ...task });
-    } else {
-      tasks[taskIndex] = { ...task };
-    }
-
-    this.saveTaskListChanges(tasks);
-
-    this.setState({ editingTask: task, editingTaskErrors: {} });
+    this.saveTask(task);
   };
 
   handleTaskDelete = (id) => {
@@ -227,6 +239,12 @@ class AppTaskList extends Component {
     this.saveTaskListChanges(tasks);
 
     this.setState({ editingTask: task });
+  };
+
+  handleTaskSubmit = (task) => {
+    if (this.saveTask(task)) {
+      this.handleEditorClose();
+    }
   };
 
   filterTasks = (tasks) => {
@@ -339,8 +357,8 @@ class AppTaskList extends Component {
           className="taskEditorView"
           fields={taskEditorFields}
           hide={!editMode}
-          onChange={this.handleTaskEdit}
           onClose={this.handleEditorClose}
+          onSubmit={this.handleTaskSubmit}
           task={editingTask}
           taskErrors={editingTaskErrors}
         />

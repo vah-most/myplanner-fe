@@ -7,10 +7,15 @@
  */
 
 @import "../Display.scss";
+@import "../Sizes.scss";
 
 .taskGroups {
   @include flexView(row);
   flex-wrap: wrap;
+
+  max-height: $taskRowMaxHeight;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .taskGroupsItem {

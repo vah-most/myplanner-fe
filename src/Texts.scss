@@ -27,6 +27,10 @@
   font-size: var(--font-size-small);
 }
 
+@mixin footerTextProps() {
+  font-size: var(--font-size-big);
+}
+
 @mixin formInputErrorTextProps() {
   font-size: var(--font-size-normal);
   color: $colorAlert;
@@ -38,6 +42,10 @@
 
 @mixin formInputTextProps() {
   font-size: var(--font-size-normal);
+}
+
+@mixin formSubmitButtonTextProps() {
+  font-size: var(--font-size-big);
 }
 
 @mixin inputLabelTextProps() {

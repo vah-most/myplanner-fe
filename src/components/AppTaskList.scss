@@ -16,6 +16,7 @@
 
 .mainHeader {
   height: $headerHeight;
+  min-height: $headerHeight;
 }
 
 .mainView {
@@ -28,8 +29,9 @@
 
 .taskTable {
   margin-left: 10px;
-  flex-grow: 1;
   width: 99%;
+  height: 100%;
+  overflow: auto;
 }
 
 .taskTableContainer,

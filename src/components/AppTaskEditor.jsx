@@ -6,6 +6,9 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import { useState, useEffect } from "react";
+
+import AppButton from "./common/AppButton";
 import AppIcon from "./common/AppIcon";
 import AppTitledInput from "./common/AppTitledInput";
 import AppTooltip from "./common/AppTooltip";
@@ -17,13 +20,27 @@ const AppTaskEditor = ({
   fields,
   hide = true,
   onChange,
+  onSubmit,
   onClose,
   task,
   taskErrors = {},
 }) => {
+  const [values, setValues] = useState(task);
   const getEditorTitle = () => {
-    if (task.id > 0) return "Modify Task";
     return task.title ? task.title : "New Task";
+  };
+
+  useEffect(() => {
+    setValues(task);
+  }, [task._id]);
+
+  const handlePropChange = (prop, value) => {
+    if (onChange) onChange(task._id, prop, value);
+
+    let modifiedValues = { ...values };
+    modifiedValues[prop] = value;
+
+    setValues(modifiedValues);
   };
 
   const hidingStyle = hide ? { width: "0%" } : null;
@@ -42,23 +59,32 @@ const AppTaskEditor = ({
         <span>{getEditorTitle()}</span>
       </div>
       <div className="taskEditorFieldsContainer">
-        {task &&
+        {values &&
           fields.map((item, index) => {
             return (
               <AppTitledInput
                 key={index}
+                alwaysShowLabel={true}
                 className="titledInputGeneric"
                 error={item.name in taskErrors ? taskErrors[item.name] : null}
                 extraProps={item.extraProps}
-                onChange={(value) => onChange(task._id, item.name, value)}
+                onChange={(value) => handlePropChange(item.name, value)}
                 placeholder={item.title}
                 style={item.style}
                 inputType={item.type}
-                value={task[item.name]}
+                value={values[item.name]}
                 {...item.extra}
               />
             );
           })}
+        {onSubmit && (
+          <AppButton
+            className="taskEditorSubmitButton"
+            onClick={() => onSubmit(values)}
+          >
+            Save
+          </AppButton>
+        )}
       </div>
     </div>
   );

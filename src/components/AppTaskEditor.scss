@@ -18,21 +18,23 @@
   position: relative;
   border-right: #818487 solid 1px;
   height: 100%;
-
   overflow: auto;
-
-  > div > div {
-    background-color: $editorBGColor;
-  }
 }
 
 .taskEditorFieldsContainer {
-  @include flexView(column, flex-start, center);
+  @include flexView(column, center, center);
+  flex-grow: 1;
 
-  width: 90%;
-  height: 100%;
-  padding-top: 20px;
+  width: 100%;
   align-self: center;
+
+  padding: 20px 15px 20px 15px;
+}
+
+.taskEditorSubmitButton {
+  width: 100%;
+  height: 35px;
+  margin-top: 20px;
 }
 
 .taskEditorTitle {
@@ -43,7 +45,6 @@
   color: $editorTitleColor;
   height: 50px;
   min-height: 50px;
-  margin-bottom: 50px;
   position: relative;
 
   .taskEditorCloser {
@@ -61,4 +62,5 @@
 
 .titledInputGeneric {
   width: 100%;
+  background-color: $editorBGColor;
 }

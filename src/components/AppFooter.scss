@@ -9,13 +9,16 @@
 @import "../Colors.scss";
 @import "../Display.scss";
 @import "../Sizes.scss";
+@import "../Texts.scss";
 
 .footer {
   @include flexView(row, flex-end, center);
+  @include footerTextProps();
+
   width: 100%;
   height: $footerHeight;
+  min-height: $footerHeight;
   background-color: $footerBGColor;
   color: $footerTextColor;
   padding-right: 20px;
-  font-size: 14px;
 }
