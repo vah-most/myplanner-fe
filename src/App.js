@@ -14,6 +14,7 @@ import { store } from "./Store";
 import authService from "services/AuthService";
 import AppMainView from "components/AppMainView";
 import AppLoginPage from "components/AppLoginPage";
+import AppFooter from "components/AppFooter";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
@@ -50,6 +51,7 @@ class App extends React.Component {
                 <Route path="*" element={<Navigate to="/login" />} />
               </Routes>
             )}
+            <AppFooter />
           </div>
         </BrowserRouter>
       </Provider>

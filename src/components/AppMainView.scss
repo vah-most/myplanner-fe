@@ -9,5 +9,5 @@
 @import "../Sizes.scss";
 
 .mainTaskList {
-  height: 100%;
+  height: calc(100% - $footerHeight);
 }

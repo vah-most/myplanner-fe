@@ -24,15 +24,15 @@
 }
 
 .deadlineTextAlert {
-  color: $colorAlert;
+  color: $deadlineAlertTextColor;
 }
 
 .deadlineTextOk {
-  color: $colorOk;
+  color: $deadlineOkTextColor;
 }
 
 .deadlineTextPassed {
-  color: #d37654;
+  color: $deadlinePassedTextColor;
   text-decoration: line-through;
 }
 

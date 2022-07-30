@@ -24,14 +24,14 @@
 
 .syncIconUnsyncedRevert {
   &:hover {
-    color: $colorAlert;
+    color: $menuIconAlertHoverColor;
     @include rotater(1s, infinite);
   }
 }
 
 .syncIconUnsyncedUpload {
   &:hover {
-    color: $colorOk;
+    color: $menuIconOkHoverColor;
     @include shaker(2s, infinite, 0s, y);
   }
 }

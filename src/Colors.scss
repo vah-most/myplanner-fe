@@ -7,16 +7,21 @@
  */
 
 //---------------------- PALETTE ---------------------//
-$colorDark: #1a3e2e;
+$colorDark: #00322d;
 $colorLightGreen: #d1fcd1;
 $colorShinyGreen: #90ee90;
 $colorWhiteGreen: #f4fff4;
 $colorBlueGreen: #d6e9e0;
+$colorCoolBlue: #44b7ae;
+$colorDimBlue: #407ab3;
 $colorBlue: #0000ff;
 $colorDarkBlue: #00008b;
+$colorLighterBlue: #e6f1f1;
 $colorOrange: #ffa500;
 $colorRed: #ff0000;
+$colorCoolRed: #e03a3e;
 $colorLight: #eee3e3;
+$colorWhitish: #f0f8ff;
 $colorWhite: #ffffff;
 
 //---------------------- GENERIC ---------------------//
@@ -27,9 +32,16 @@ $colorOk: #198754;
 $colorPlaceholder: #808080;
 
 //---------------------- ITEMS ---------------------//
-$buttonBGColor: $colorBlue;
+$addButtonBGColor: $colorDimBlue;
+$addButtonTextColor: $colorWhitish;
+
+$buttonBGColor: $colorDimBlue;
 $buttonClickedBGColor: $colorDarkBlue;
 $buttonTextColor: $colorWhite;
+
+$deadlineAlertTextColor: $colorAlert;
+$deadlineOkTextColor: $colorCoolBlue;
+$deadlinePassedTextColor: $colorCoolRed;
 
 $editorBGColor: $colorWhite;
 $editorTitleBGColor: $colorDark;
@@ -40,22 +52,25 @@ $footerTextColor: $colorLight;
 
 $headerBGColor: $colorDark;
 
-$inputLabelColor: $colorDarkBlue;
 $inputBGColor: $colorWhite;
 $inputFocusBorder: $colorDark;
+$inputLabelColor: $colorDimBlue;
 
-$inputCheckedColor: $colorOk;
+$inputCheckedColor: $colorDimBlue;
 
+$menuIconAlertHoverColor: $colorAlert;
 $menuIconColor: $colorWhite;
 $menuIconDisabledColor: $colorDisabled;
+$menuIconOkHoverColor: $colorDimBlue;
 
-$rowDoneBGColor: $colorLightGreen;
-$rowOperationEditColor: $colorOk;
+$rowDoneBGColor: $colorLighterBlue;
 $rowOperationDeleteColor: $colorAlert;
+$rowOperationEditColor: $colorDimBlue;
 
 $searchBarBGColor: $colorWhite;
 $searchBarIconColor: $colorPlaceholder;
 
 $tagAddIconColor: $colorPlaceholder;
 
-$textBubbleBGColor: $colorShinyGreen;
+$textBubbleBGColor: $colorCoolBlue;
+$textBubbleColor: $colorWhitish;

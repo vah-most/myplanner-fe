@@ -12,9 +12,9 @@
 
 .loginContainer {
   width: 400px;
-  background-color: $colorBlueGreen;
   border: 1px solid $colorDark;
-  border-radius: $boxBorderRadius;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .loginInputLabel {
@@ -22,9 +22,12 @@
 }
 
 .loginPage {
-  @include flexCenterView(column);
-  width: 100%;
+  @include flexView(row, flex-start, center);
+
+  /* Image by: <a href="https://pixabay.com/users/freephotocc-2275370/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1280538">Free Photos</a> from <a href="https://pixabay.com//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1280538">Pixabay</a> */
+  background: url("../assets/img/LoginBackground.jpg");
+  background-size: 100% auto;
   height: 100%;
-  /* Background-Image: https://www.toptal.com/designers/subtlepatterns/uploads/gravel.png */
-  background: url("../assets/img/LoginBackground.png");
+  padding-inline-start: 100px;
+  width: 100%;
 }

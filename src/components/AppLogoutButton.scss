@@ -12,11 +12,11 @@
 
 .signoutButton {
   cursor: pointer;
-  color: #ffffff;
+  color: $menuIconColor;
   font-size: $menuIconSize;
   padding-left: $menuIconSpace;
   &:hover {
-    color: $colorAlert;
+    color: $menuIconAlertHoverColor;
     @include shaker(2s, infinite, 0s, x);
   }
 }

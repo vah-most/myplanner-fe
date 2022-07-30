@@ -365,7 +365,6 @@ class AppTaskList extends Component {
             sortBy={sortBy}
             sortDirAsc={sortDirAsc}
           />
-          <AppFooter />
         </div>
         {this.props.children}
       </div>
