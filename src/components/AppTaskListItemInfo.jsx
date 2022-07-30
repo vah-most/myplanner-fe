@@ -19,10 +19,10 @@ function TaskListItemInfo({ task }) {
         <span className="taskTitle">{task.title}</span>
       </div>
       <div className="taskDescContainer">
-        <span className="taskDesc" id={`task_${task.id}`}>
+        <span className="taskDesc" id={`task_${task._id}`}>
           {task.desc}
         </span>
-        <AppTooltip target={`task_${task.id}`}>{task.desc}</AppTooltip>
+        <AppTooltip target={`task_${task._id}`}>{task.desc}</AppTooltip>
       </div>
     </div>
   );
