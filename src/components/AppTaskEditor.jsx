@@ -54,7 +54,10 @@ const AppTaskEditor = ({
             name="times"
             onClick={onClose}
           />
-          <AppTooltip target="button_close_editor">Close (ESC)</AppTooltip>
+          <AppTooltip target="button_close_editor">
+            <span>Close </span>
+            <span className="shortcutText">(ESC)</span>
+          </AppTooltip>
         </div>
         <span>{getEditorTitle()}</span>
       </div>

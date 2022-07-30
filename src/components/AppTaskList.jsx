@@ -20,7 +20,6 @@ import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
 import AppTaskEditor from "./AppTaskEditor";
 import AppHeader from "./AppHeader";
-import AppFooter from "./AppFooter";
 
 import "./AppTaskList.scss";
 
