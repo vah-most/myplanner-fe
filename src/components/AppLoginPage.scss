@@ -31,3 +31,14 @@
   padding-inline-start: 100px;
   width: 100%;
 }
+
+@media (max-width: $minNormalWidth) {
+  .loginContainer {
+    width: 300px;
+  }
+
+  .loginPage {
+    padding-inline-start: 0px;
+    justify-content: center;
+  }
+}

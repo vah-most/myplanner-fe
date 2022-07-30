@@ -12,6 +12,8 @@
 .taskListItemInfo {
   @include flexView(column);
 
+  min-width: 100px;
+
   .taskTitle {
     @include taskTitleTextProps();
   }

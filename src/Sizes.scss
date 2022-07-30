@@ -6,6 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+@import "./Display.scss";
+
 //---------------------- HEADER ---------------------//
 $footerHeight: 50px;
 
@@ -13,8 +15,19 @@ $footerHeight: 50px;
 $headerHeight: 50px;
 
 //----------------------- MENU ----------------------//
-$menuIconSize: 20px;
-$menuIconSpace: 10px;
+:root {
+  --menu-icon-size: 20px;
+  --menu-icon-space: 10px;
+}
+@media (max-width: $minNormalWidth) {
+  :root {
+    --menu-icon-size: 15px;
+    --menu-icon-space: 5px;
+  }
+}
+
+$menuIconSize: var(--menu-icon-size);
+$menuIconSpace: var(--menu-icon-space);
 
 //--------------------- Boxes ----------------------//
 $boxBorderRadius: 5px;
