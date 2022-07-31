@@ -13,6 +13,7 @@ export function getRemainingDays(fromTime, toTime) {
 }
 
 export const KEY_CODES = {
+  KEY_ENTER: 13,
   KEY_ESCAPE: 27,
   KEY_F2: 113,
 };

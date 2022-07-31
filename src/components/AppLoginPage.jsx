@@ -61,6 +61,8 @@ class AppLogin extends Component {
   };
 
   handleSubmit = async () => {
+    this.setState({ errors: {} });
+
     const { username, password } = this.state.values;
     try {
       const hiddenPassword = MD5(password).toString();
