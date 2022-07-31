@@ -81,7 +81,6 @@ class AppLogin extends Component {
         <div className="loginContainer">
           <AppForm
             errors={errors}
-            inputLabelClassName="loginInputLabel"
             inputs={loginInputs}
             onChange={this.handleChange}
             onSubmit={this.handleSubmit}
