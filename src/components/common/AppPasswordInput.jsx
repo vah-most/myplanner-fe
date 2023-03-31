@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from "react";
-import AppIcon from "./AppIcon";
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 
 import "./AppPasswordInput.scss";
 
@@ -25,11 +25,11 @@ const AppPasswordInput = ({ className, type, ...extra }) => {
         type={hide ? "password" : "text"}
         {...extra}
       />
-      <AppIcon
-        className="hand passwordInputIcon"
-        name={hide ? "eye" : "eye-slash"}
-        onClick={toggleHide}
-      />
+      {hide ? (
+        <EyeSlash className="hand passwordInputIcon" onClick={toggleHide} />
+      ) : (
+        <Eye className="hand passwordInputIcon" onClick={toggleHide} />
+      )}
     </div>
   );
 };

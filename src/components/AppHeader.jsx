@@ -10,7 +10,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 
 import AppSyncer from "./AppSyncer";
-import AppSearchBar from "./common/AppSearchBar";
+import AimoSearchBar from "@aimo.ui/aimo-searchbar";
 import AppPreferencesButton from "./AppPreferencesButton";
 import AppLogoutButton from "./AppLogoutButton";
 
@@ -23,7 +23,7 @@ const AppHeader = ({ className }) => {
         <AppLogoutButton />
         <AppPreferencesButton />
         <AppSyncer />
-        <AppSearchBar />
+        <AimoSearchBar tooltip="Search Tasks" />
       </Container>
     </Navbar>
   );

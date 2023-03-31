@@ -13,7 +13,7 @@ import { KEY_CODES } from "utils/utils";
 import taskService from "../services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
-import AppTable from "./common/AppTable";
+import AimoTable from "@aimo.ui/aimo-table";
 import AppTaskListItemInfo from "./AppTaskListItemInfo";
 import AppTaskListItemGroups from "./AppTaskListItemGroups";
 import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
@@ -22,36 +22,6 @@ import AppTaskEditor from "./AppTaskEditor";
 import AppHeader from "./AppHeader";
 
 import "./AppTaskList.scss";
-
-const taskListFields = [
-  {
-    field: "title",
-    title: "Task",
-    size: 0,
-    isSortable: true,
-  },
-  {
-    field: "groups",
-    title: "Groups",
-    size: 2,
-    isSortable: true,
-    classes: "align-middle",
-  },
-  {
-    field: "deadline",
-    title: "Deadline",
-    size: 2,
-    isSortable: true,
-    classes: "text-center",
-  },
-  {
-    field: "isCompleted",
-    title: "Done",
-    size: 1,
-    isSortable: true,
-    classes: "text-center",
-  },
-];
 
 const taskEditorFields = [
   {
@@ -99,6 +69,7 @@ class AppTaskList extends Component {
 
     await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
+    console.log("tasks", tasks);
     const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
     this.setState({
       tasks,
@@ -142,18 +113,18 @@ class AppTaskList extends Component {
     });
   };
 
-  handleRequestEdit = (id) => {
+  handleRequestEdit = (task) => {
     const { tasks } = this.state;
 
-    let editingTask = tasks.find((t) => t._id === id);
+    let editingTask = tasks.find((t) => t._id === task._id);
     if (editingTask) {
       editingTask = { ...editingTask };
       this.setState({ editMode: true, editingTask });
     }
   };
 
-  handleRequestDelete = (id) => {
-    this.handleTaskDelete(id);
+  handleRequestDelete = (task) => {
+    this.handleTaskDelete(task._id);
   };
 
   handleEditorClose = () => {
@@ -300,6 +271,55 @@ class AppTaskList extends Component {
     return tasks;
   };
 
+  getTaskListFields = () => {
+    const { editMode } = this.state;
+    return editMode
+      ? [
+          {
+            field: "title",
+            title: "Task",
+            size: 0,
+            isSortable: true,
+          },
+          {
+            field: "deadline",
+            title: "Deadline",
+            size: 2,
+            isSortable: true,
+            classes: "text-center",
+          },
+        ]
+      : [
+          {
+            field: "title",
+            title: "Task",
+            size: 0,
+            isSortable: true,
+          },
+          {
+            field: "groups",
+            title: "Groups",
+            size: 2,
+            isSortable: true,
+            classes: "align-middle",
+          },
+          {
+            field: "deadline",
+            title: "Deadline",
+            size: 2,
+            isSortable: true,
+            classes: "text-center",
+          },
+          {
+            field: "isCompleted",
+            title: "Done",
+            size: 1,
+            isSortable: true,
+            classes: "text-center",
+          },
+        ];
+  };
+
   render() {
     const {
       editingTask,
@@ -312,19 +332,61 @@ class AppTaskList extends Component {
     } = this.state;
     const { className } = this.props;
 
+    const taskListFields = this.getTaskListFields();
     const filteredTasks = this.filterTasks(tasks);
-    const sortedTasks = this.sortTasks(filteredTasks);
+    const data = this.sortTasks(filteredTasks);
 
+    const renderFuncs = {};
+    const columnProps = {
+      title: {
+        headerTitle: "Task",
+        headerClassName: "",
+        isSortable: true,
+        renderFunc: (task) => <AppTaskListItemInfo task={task} />,
+      },
+      groups: {
+        headerTitle: "Groups",
+        isSortable: true,
+        headerClassName: "align-middle taskTableCenterHeader",
+        cellClassName: "align-middle col-2",
+        renderFunc: (task) => <AppTaskListItemGroups groups={task.groups} />,
+      },
+      deadline: {
+        headerTitle: "Deadline",
+        isSortable: true,
+        headerClassName: "col-2 taskTableCenterHeader",
+        cellClassName: "col-2 text-center",
+        renderFunc: (task) => (
+          <AppTaskListItemDeadline deadline={task.deadline} />
+        ),
+      },
+      isCompleted: {
+        headerTitle: "Done",
+        isSortable: true,
+        headerClassName: "taskTableCenterHeader",
+        cellClassName: "text-center col-1",
+        renderFunc: (task) => (
+          <AppTaskListItemCompleted
+            taskId={task._id}
+            value={task.isCompleted}
+            onChange={() =>
+              this.handleTaskCompleted(task._id, !task.isCompleted)
+            }
+          />
+        ),
+      },
+    };
+    /*
     const data = sortedTasks.map((task) => {
       const item = {
-        id: task._id,
-        className: task.isCompleted ? "completedTaskRow" : "",
         fields: [
           {
+            title: "Title",
             field: "title",
             render: () => <AppTaskListItemInfo task={task} />,
           },
           {
+            title: "Groups",
             field: "groups",
             render: () => <AppTaskListItemGroups groups={task.groups} />,
             cellClasses: "align-middle",
@@ -349,7 +411,7 @@ class AppTaskList extends Component {
       };
       return item;
     });
-
+*/
     return (
       <div className={`${className} mainView`}>
         <AppTaskEditor
@@ -367,20 +429,23 @@ class AppTaskList extends Component {
           }
         >
           <AppHeader className="mainHeader" />
-          <AppTable
+          <AimoTable
             className="taskTable"
-            compactFields={["title", "deadline"]}
-            compactMode={editMode}
+            rowClassName={(task) =>
+              task.isCompleted ? "completedTaskRow" : ""
+            }
             data={data}
-            header={taskListFields}
+            //            disableDeleteOperation={true}
+            //            disableEditOperation={true}
+            columnProps={columnProps}
+            renderFuncs={renderFuncs}
             onRequestAdd={this.handleRequestAdd}
             onRequestEdit={this.handleRequestEdit}
             onRequestDelete={this.handleRequestDelete}
             onSort={this.handleSort}
-            operationsInCompactMode={true}
             rowsPerPage={tableRowsPerPage}
-            sortBy={sortBy}
-            sortDirAsc={sortDirAsc}
+            sortedBy={sortBy}
+            sortedDirAsc={sortDirAsc}
           />
         </div>
         {this.props.children}

@@ -8,7 +8,7 @@
 
 import React from "react";
 
-import AppTooltip from "./common/AppTooltip";
+import AppTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppTaskListItemInfo.scss";
 

@@ -38,6 +38,11 @@
   overflow: auto;
 }
 
+.taskTableCenterHeader {
+  justify-content: center;
+  text-align: center;
+}
+
 .taskTableContainer,
 .taskTableContainerEditMode {
   @include flexView(column);

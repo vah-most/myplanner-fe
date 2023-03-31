@@ -9,11 +9,11 @@
 import { useState, useEffect } from "react";
 
 import AppButton from "./common/AppButton";
-import AppIcon from "./common/AppIcon";
-import AppTitledInput from "./common/AppTitledInput";
-import AppTooltip from "./common/AppTooltip";
+import AimoTitledInput from "@aimo.ui/aimo-titledinput";
+import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppTaskEditor.scss";
+import { X } from "react-bootstrap-icons";
 
 const AppTaskEditor = ({
   className,
@@ -48,16 +48,11 @@ const AppTaskEditor = ({
     <div className={`taskEditor ${className}`} style={hidingStyle}>
       <div className="taskEditorTitle">
         <div className="taskEditorCloser">
-          <AppIcon
-            className="hand taskEditorCloserIcon"
-            id="button_close_editor"
-            name="times"
-            onClick={onClose}
-          />
-          <AppTooltip target="button_close_editor">
+          <X className="hand taskEditorCloserIcon" onClick={onClose} />
+          <AimoTooltip target="button_close_editor">
             <span>Close </span>
             <span className="shortcutText">(ESC)</span>
-          </AppTooltip>
+          </AimoTooltip>
         </div>
         <span>{getEditorTitle()}</span>
       </div>
@@ -65,7 +60,7 @@ const AppTaskEditor = ({
         {values &&
           fields.map((item, index) => {
             return (
-              <AppTitledInput
+              <AimoTitledInput
                 key={index}
                 alwaysShowLabel={true}
                 className="titledInputGeneric"

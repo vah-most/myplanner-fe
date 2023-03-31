@@ -11,9 +11,8 @@ import { now } from "moment";
 
 import { getRemainingDays } from "../utils/utils";
 
-import AppIcon from "./common/AppIcon";
-
 import "./AppTaskListItemDeadline.scss";
+import { Bell, CalendarCheck, CalendarX } from "react-bootstrap-icons";
 
 const AppTaskListItemDeadline = ({ deadline }) => {
   let due = null;
@@ -57,26 +56,13 @@ const AppTaskListItemDeadline = ({ deadline }) => {
 
     if (due === 0)
       return (
-        <AppIcon
-          name="bell"
-          className="deadlineIcon deadlineTextAlert deadlineIconAlert"
-        />
+        <Bell className="deadlineIcon deadlineTextAlert deadlineIconAlert" />
       );
 
     if (due < 0)
-      return (
-        <AppIcon
-          name="calendar-times-o"
-          className="deadlineIcon deadlineTextPassed"
-        />
-      );
+      return <CalendarX className="deadlineIcon deadlineTextPassed" />;
 
-    return (
-      <AppIcon
-        name="calendar-check-o"
-        className="deadlineIcon deadlineTextOk"
-      />
-    );
+    return <CalendarCheck className="deadlineIcon deadlineTextOk" />;
   };
 
   return (

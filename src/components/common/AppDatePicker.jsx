@@ -6,9 +6,8 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
+import { Calendar } from "react-bootstrap-icons";
 import DatePicker from "react-date-picker";
-
-import AppIcon from "./AppIcon";
 
 import "react-date-picker/dist/DatePicker.css";
 import "./AppDatePicker.scss";
@@ -18,7 +17,7 @@ const AppDatePicker = ({ value, className, onChange }) => {
     <DatePicker
       calendarClassName="datePickerCalendar"
       calendarIcon={
-        <AppIcon
+        <Calendar
           className="datePickerIcon datePickerCalendarIcon"
           name="calendar"
         />

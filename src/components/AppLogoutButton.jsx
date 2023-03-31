@@ -10,10 +10,10 @@ import React from "react";
 
 import authService from "services/AuthService";
 
-import AppIcon from "./common/AppIcon";
-import AppTooltip from "./common/AppTooltip";
+import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppLogoutButton.scss";
+import { BoxArrowRight } from "react-bootstrap-icons";
 
 const AppLogoutButton = () => {
   const doLogout = () => {
@@ -23,13 +23,8 @@ const AppLogoutButton = () => {
 
   return (
     <React.Fragment>
-      <AppIcon
-        className="signoutButton"
-        id="menu_logout"
-        name="sign-out"
-        onClick={doLogout}
-      />
-      <AppTooltip target="menu_logout">Logout from account</AppTooltip>
+      <BoxArrowRight className="signoutButton" onClick={doLogout} />
+      <AimoTooltip target="menu_logout">Logout from account</AimoTooltip>
     </React.Fragment>
   );
 };

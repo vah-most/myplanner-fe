@@ -11,10 +11,11 @@ import { Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { preferencesChange } from "reducers/PreferencesReducer";
-import AppIcon from "./common/AppIcon";
-import AppTooltip from "./common/AppTooltip";
+import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppPreferencesButton.scss";
+import React from "react";
+import { Check2, Gear } from "react-bootstrap-icons";
 
 const AppPreferencesButton = () => {
   const dispatch = useDispatch();
@@ -27,38 +28,38 @@ const AppPreferencesButton = () => {
   };
 
   return (
-    <Dropdown className="prefButtonContainer">
-      <Dropdown.Toggle
-        variant="link"
-        bsPrefix="p-0"
-        className="prefButtonToggle"
-      >
-        <AppIcon className="prefButton" id="menu_preferences" name="cog" />
-        <AppTooltip target="menu_preferences">Preferences</AppTooltip>
-      </Dropdown.Toggle>
-      <Dropdown.Menu className="dropdown-menu prefDropDown">
-        <NavDropdown.Item
-          onClick={() => {
-            handlePrefChange(
-              "hideCompletedTasks",
-              "hideCompletedTasks" in preferences
-                ? !preferences["hideCompletedTasks"]
-                : true
-            );
-          }}
+    <React.Fragment>
+      <Dropdown className="prefButtonContainer" id="menu_preferences">
+        <Dropdown.Toggle
+          variant="link"
+          bsPrefix="p-0"
+          className="prefButtonToggle"
         >
-          <div className="prefItemContainer">
-            <div className="prefItemChecked">
-              {"hideCompletedTasks" in preferences &&
-                preferences["hideCompletedTasks"] === true && (
-                  <AppIcon name="check" />
-                )}
+          <Gear className="prefButton" />
+        </Dropdown.Toggle>
+        <Dropdown.Menu className="dropdown-menu prefDropDown">
+          <NavDropdown.Item
+            onClick={() => {
+              handlePrefChange(
+                "hideCompletedTasks",
+                "hideCompletedTasks" in preferences
+                  ? !preferences["hideCompletedTasks"]
+                  : true
+              );
+            }}
+          >
+            <div className="prefItemContainer">
+              <div className="prefItemChecked">
+                {"hideCompletedTasks" in preferences &&
+                  preferences["hideCompletedTasks"] === true && <Check2 />}
+              </div>
+              <div className="prefItemText">Hide Completed Tasks</div>
             </div>
-            <div className="prefItemText">Hide Completed Tasks</div>
-          </div>
-        </NavDropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+          </NavDropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <AimoTooltip target="menu_preferences">Preferences</AimoTooltip>
+    </React.Fragment>
   );
 };
 

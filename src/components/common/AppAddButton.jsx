@@ -9,16 +9,18 @@
 import AppTooltip from "./AppTooltip";
 
 import "./AppAddButton.scss";
+import { Plus } from "react-bootstrap-icons";
 
 const AppAddButton = ({ className, onClick, style, ...extra }) => {
   return (
     <div
       className={`addButton hand ${className}`}
+      id="button_new_task"
       onClick={onClick}
       style={style}
       {...extra}
     >
-      <span id="button_new_task">Add Task </span>
+      <Plus className="addButtonIcon" />
       <AppTooltip target="button_new_task">
         <span>Add new task </span>
         <span className="shortcutText">(F2)</span>

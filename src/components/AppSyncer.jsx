@@ -12,10 +12,10 @@ import { useDispatch, useSelector } from "react-redux";
 import taskService from "services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
-import AppIcon from "./common/AppIcon";
-import AppTooltip from "./common/AppTooltip";
+import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppSyncer.scss";
+import { ArrowCounterclockwise, Upload } from "react-bootstrap-icons";
 
 const AppSyncer = () => {
   const dispatch = useDispatch();
@@ -44,20 +44,13 @@ const AppSyncer = () => {
 
   return (
     <div className="syncButtonsContainer">
-      <AppIcon
+      <ArrowCounterclockwise
         className={revertClassName}
-        id="menu_undo"
-        name="undo"
         onClick={handleRevertTasks}
       />
-      <AppTooltip target="menu_undo">Revert to last synced data</AppTooltip>
-      <AppIcon
-        className={uploadClassName}
-        name="upload"
-        id="menu_upload"
-        onClick={handleUploadTasks}
-      />
-      <AppTooltip target="menu_upload">Upload data to server</AppTooltip>
+      <AimoTooltip target="menu_undo">Revert to last synced data</AimoTooltip>
+      <Upload className={uploadClassName} onClick={handleUploadTasks} />
+      <AimoTooltip target="menu_upload">Upload data to server</AimoTooltip>
     </div>
   );
 };

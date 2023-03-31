@@ -9,6 +9,7 @@
 import CryptoJS from "crypto-js";
 
 import Config from "../Config.json";
+import { fakeGroups, fakeTasks } from "./FakeTasks";
 import httpService from "./HttpService";
 import storageService from "./StorageService";
 
@@ -19,6 +20,7 @@ class TaskService {
   tasks = [];
 
   async reloadTasks() {
+    return fakeGroups;
     const result = await httpService.get(this.serverAddress);
     if (httpService.isOk(result)) {
       const data = httpService.getData(result);
@@ -37,10 +39,12 @@ class TaskService {
   }
 
   getTasks = async () => {
+    return fakeTasks;
     return this.tasks;
   };
 
   getAllGroups = () => {
+    return fakeGroups;
     let groups = new Set();
 
     this.tasks.forEach((t) => {

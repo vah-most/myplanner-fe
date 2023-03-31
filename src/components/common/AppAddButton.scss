@@ -13,12 +13,28 @@
 
 .addButton {
   @include flexCenterView(row);
-  @include addButtonTextProps();
 
+  $addButtonSize: 50px;
+
+  width: $addButtonSize;
+  height: $addButtonSize;
   background-color: $addButtonBGColor;
   color: $colorWhitish;
+  text-align: center;
+  border-radius: $addButtonSize / 2;
+  /*
+  @include flexCenterView(row);
+  @include addButtonTextProps();
+
   font-weight: 600 !important;
   border-radius: $boxBorderRadius;
   min-height: 25px;
   padding: 5px 10px 5px 10px;
+  */
+}
+
+.addButtonIcon {
+  font-size: 18px;
+  font-weight: 100;
+  margin-left: 0px !important;
 }

@@ -9,10 +9,10 @@
 import { useState } from "react";
 import Select, { components } from "react-select";
 
-import AppIcon from "./AppIcon";
 import AppTextBubble from "./AppTextBubble";
 
 import "./AppTagCollection.scss";
+import { Plus } from "react-bootstrap-icons";
 
 const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
   const [tagInput, setTagInput] = useState("");
@@ -38,8 +38,7 @@ const AppTagCollection = ({ className, collection, onChange, style, tags }) => {
 
   const displayAddIcon = () => {
     return (
-      <AppIcon
-        name="plus"
+      <Plus
         className="hand tagAddIcon"
         onClick={() => handleTagAdd(tagInput)}
       />

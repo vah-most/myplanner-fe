@@ -7,8 +7,7 @@
  */
 
 import React, { useState } from "react";
-
-import AppIcon from "./AppIcon";
+import { X } from "react-bootstrap-icons";
 
 import "./AppTextBubble.scss";
 
@@ -40,7 +39,7 @@ function AppTextBubble({
             displayDelete ? { visibility: "visible" } : { visibility: "hidden" }
           }
         >
-          <AppIcon name="times" />
+          <X />
         </div>
       )}
       <span>{text}</span>

@@ -22,6 +22,7 @@ $colorRed: #ff0000;
 $colorCoolRed: #e03a3e;
 $colorLight: #eee3e3;
 $colorWhitish: #f0f8ff;
+$colorLightGray: #d3d3d3;
 $colorWhite: #ffffff;
 
 //---------------------- GENERIC ---------------------//
@@ -64,6 +65,12 @@ $menuIconAlertHoverColor: $colorAlert;
 $menuIconColor: $colorWhite;
 $menuIconDisabledColor: $colorDisabled;
 $menuIconOkHoverColor: $colorDimBlue;
+
+$paginationBGColor: $colorWhite;
+$paginationBorderColor: $colorLightGray;
+$paginationTextColor: $colorDimBlue;
+$paginationSelectedBGColor: $colorDimBlue;
+$paginationSelectedTextColor: $colorWhite;
 
 $rowDoneBGColor: $colorLighterBlue;
 $rowOperationDeleteColor: $colorAlert;
