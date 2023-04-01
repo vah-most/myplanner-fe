@@ -1,16 +1,14 @@
 /*
- * Created on Sat Jul 23 2022
- *
  * Copyright (c) 2022 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import Config from "../Config.json";
+import Config from "../../Config.json";
 
-import "./AppFooter.scss";
+import "./Footer.scss";
 
-const AppFooter = () => {
+const Footer = () => {
   return (
     <div className="bg-dark bg-gradient footer">
       <span>{Config.Copyright}</span>
@@ -18,4 +16,4 @@ const AppFooter = () => {
   );
 };
 
-export default AppFooter;
+export default Footer;

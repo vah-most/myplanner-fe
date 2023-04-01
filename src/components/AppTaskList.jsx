@@ -18,7 +18,7 @@ import AppTaskListItemInfo from "./AppTaskListItemInfo";
 import AppTaskListItemGroups from "./AppTaskListItemGroups";
 import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
-import AppHeader from "./AppHeader";
+import Header from "./Header";
 
 import "./AppTaskList.scss";
 
@@ -268,7 +268,7 @@ class AppTaskList extends Component {
             editMode ? "taskTableContainerEditMode" : "taskTableContainer"
           }
         >
-          <AppHeader className="mainHeader" />
+          <Header className="mainHeader" />
           <AimoTable
             className="taskTable"
             data={tasks}

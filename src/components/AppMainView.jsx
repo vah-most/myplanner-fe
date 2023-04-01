@@ -9,7 +9,7 @@
 import React from "react";
 
 import AppTaskList from "./AppTaskList";
-import AppFooter from "components/AppFooter";
+import Footer from "./Footer";
 
 import "./AppMainView.scss";
 
@@ -17,7 +17,7 @@ const AppMainView = () => {
   return (
     <React.Fragment>
       <AppTaskList className="mainTaskList" />
-      <AppFooter />
+      <Footer />
     </React.Fragment>
   );
 };

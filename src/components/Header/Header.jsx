@@ -1,21 +1,18 @@
 /*
- * Created on Sat Jun 25 2022
- *
  * Copyright (c) 2022 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import Container from "react-bootstrap/Container";
-import { Dropdown, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 
-import AppSyncer from "./AppSyncer";
-import AppPreferencesButton from "./AppPreferencesButton";
-import AppLogoutButton from "./AppLogoutButton";
+import AppSyncer from "components/AppSyncer";
+import AppPreferencesButton from "components/AppPreferencesButton";
+import AppLogoutButton from "components/AppLogoutButton";
 
-import "./AppHeader.scss";
+import "./Header.scss";
 
-const AppHeader = ({ className }) => {
+const Header = ({ className }) => {
   return (
     <div className="container-fluid p-0" id="outer">
       <header>
@@ -41,4 +38,4 @@ const AppHeader = ({ className }) => {
   );
 };
 
-export default AppHeader;
+export default Header;
