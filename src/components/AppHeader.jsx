@@ -7,10 +7,9 @@
  */
 
 import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
+import { Dropdown, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 import AppSyncer from "./AppSyncer";
-import AimoSearchBar from "@aimo.ui/aimo-searchbar";
 import AppPreferencesButton from "./AppPreferencesButton";
 import AppLogoutButton from "./AppLogoutButton";
 
@@ -18,14 +17,27 @@ import "./AppHeader.scss";
 
 const AppHeader = ({ className }) => {
   return (
-    <Navbar className={`header ${className}`} expand="lg">
-      <Container className="headerContainer">
-        <AppLogoutButton />
-        <AppPreferencesButton />
-        <AppSyncer />
-        <AimoSearchBar tooltip="Search Tasks" />
-      </Container>
-    </Navbar>
+    <div className="container-fluid p-0" id="outer">
+      <header>
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          className={`px-3 m-0 bg-dark bg-gradient ${className}`}
+        >
+          <Navbar.Brand>Aimo-Planner</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto"></Nav>
+            <Nav>
+              <AppSyncer />
+              <AppPreferencesButton />
+              <AppLogoutButton />
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </header>
+    </div>
   );
 };
 

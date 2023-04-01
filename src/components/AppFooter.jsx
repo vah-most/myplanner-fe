@@ -12,7 +12,7 @@ import "./AppFooter.scss";
 
 const AppFooter = () => {
   return (
-    <div className="footer">
+    <div className="bg-dark bg-gradient footer">
       <span>{Config.Copyright}</span>
     </div>
   );

@@ -18,40 +18,9 @@ import AppTaskListItemInfo from "./AppTaskListItemInfo";
 import AppTaskListItemGroups from "./AppTaskListItemGroups";
 import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
 import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
-import AppTaskEditor from "./AppTaskEditor";
 import AppHeader from "./AppHeader";
 
 import "./AppTaskList.scss";
-
-const taskEditorFields = [
-  {
-    name: "title",
-    title: "Title",
-    type: "input",
-  },
-  {
-    name: "deadline",
-    title: "Deadline",
-    type: "date",
-  },
-  {
-    name: "desc",
-    title: "Description",
-    type: "textarea",
-    style: { resize: "none" },
-    extra: {
-      rows: 5,
-    },
-  },
-  {
-    name: "groups",
-    title: "Groups",
-    type: "tag",
-    extraProps: {
-      collection: () => taskService.getAllGroups(),
-    },
-  },
-];
 
 class AppTaskList extends Component {
   state = {
@@ -69,7 +38,6 @@ class AppTaskList extends Component {
 
     await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
-    console.log("tasks", tasks);
     const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
     this.setState({
       tasks,
@@ -217,38 +185,6 @@ class AppTaskList extends Component {
     }
   };
 
-  filterTasks = (tasks) => {
-    const hideCompletedTasks = this.props.preferences["hideCompletedTasks"]
-      ? this.props.preferences["hideCompletedTasks"]
-      : false;
-
-    const searchText = this.props.searchText
-      ? this.props.searchText.toLowerCase()
-      : "";
-
-    const filteredTasks = tasks.filter((t) => {
-      if (hideCompletedTasks && t.isCompleted) return false;
-
-      if (
-        typeof t.title === "string" &&
-        t.title.toLowerCase().includes(searchText)
-      )
-        return true;
-      if (
-        typeof t.desc === "string" &&
-        t.desc.toLowerCase().includes(searchText)
-      )
-        return true;
-      for (let group in t.groups) {
-        if (t.groups[group].toLowerCase().includes(searchText)) return true;
-      }
-
-      return false;
-    });
-
-    return filteredTasks;
-  };
-
   sortTasks = (tasks) => {
     const { sortBy, sortDirAsc } = this.state;
 
@@ -271,55 +207,6 @@ class AppTaskList extends Component {
     return tasks;
   };
 
-  getTaskListFields = () => {
-    const { editMode } = this.state;
-    return editMode
-      ? [
-          {
-            field: "title",
-            title: "Task",
-            size: 0,
-            isSortable: true,
-          },
-          {
-            field: "deadline",
-            title: "Deadline",
-            size: 2,
-            isSortable: true,
-            classes: "text-center",
-          },
-        ]
-      : [
-          {
-            field: "title",
-            title: "Task",
-            size: 0,
-            isSortable: true,
-          },
-          {
-            field: "groups",
-            title: "Groups",
-            size: 2,
-            isSortable: true,
-            classes: "align-middle",
-          },
-          {
-            field: "deadline",
-            title: "Deadline",
-            size: 2,
-            isSortable: true,
-            classes: "text-center",
-          },
-          {
-            field: "isCompleted",
-            title: "Done",
-            size: 1,
-            isSortable: true,
-            classes: "text-center",
-          },
-        ];
-  };
-
   render() {
     const {
       editingTask,
@@ -332,10 +219,6 @@ class AppTaskList extends Component {
     } = this.state;
     const { className } = this.props;
 
-    const taskListFields = this.getTaskListFields();
-    const filteredTasks = this.filterTasks(tasks);
-    const data = this.sortTasks(filteredTasks);
-
     const renderFuncs = {};
     const columnProps = {
       title: {
@@ -344,12 +227,14 @@ class AppTaskList extends Component {
         isSortable: true,
         renderFunc: (task) => <AppTaskListItemInfo task={task} />,
       },
-      groups: {
-        headerTitle: "Groups",
+      tags: {
+        headerTitle: "Tags",
         isSortable: true,
         headerClassName: "align-middle taskTableCenterHeader",
         cellClassName: "align-middle col-2",
-        renderFunc: (task) => <AppTaskListItemGroups groups={task.groups} />,
+        renderFunc: (task) => {
+          return <AppTaskListItemGroups groups={task.tags} />;
+        },
       },
       deadline: {
         headerTitle: "Deadline",
@@ -376,53 +261,8 @@ class AppTaskList extends Component {
         ),
       },
     };
-    /*
-    const data = sortedTasks.map((task) => {
-      const item = {
-        fields: [
-          {
-            title: "Title",
-            field: "title",
-            render: () => <AppTaskListItemInfo task={task} />,
-          },
-          {
-            title: "Groups",
-            field: "groups",
-            render: () => <AppTaskListItemGroups groups={task.groups} />,
-            cellClasses: "align-middle",
-          },
-          {
-            field: "deadline",
-            render: () => <AppTaskListItemDeadline deadline={task.deadline} />,
-            cellClasses: "text-center align-middle taskDue",
-          },
-          {
-            field: "isCompleted",
-            render: () => (
-              <AppTaskListItemCompleted
-                taskId={task._id}
-                value={task.isCompleted}
-                onChange={this.handleTaskCompleted}
-              />
-            ),
-            cellClasses: "text-center align-middle",
-          },
-        ],
-      };
-      return item;
-    });
-*/
     return (
       <div className={`${className} mainView`}>
-        <AppTaskEditor
-          className="taskEditorView"
-          fields={taskEditorFields}
-          hide={!editMode}
-          onClose={this.handleEditorClose}
-          onSubmit={this.handleTaskSubmit}
-          task={editingTask}
-          taskErrors={editingTaskErrors}
-        />
         <div
           className={
             editMode ? "taskTableContainerEditMode" : "taskTableContainer"
@@ -431,12 +271,7 @@ class AppTaskList extends Component {
           <AppHeader className="mainHeader" />
           <AimoTable
             className="taskTable"
-            rowClassName={(task) =>
-              task.isCompleted ? "completedTaskRow" : ""
-            }
-            data={data}
-            //            disableDeleteOperation={true}
-            //            disableEditOperation={true}
+            data={tasks}
             columnProps={columnProps}
             renderFuncs={renderFuncs}
             onRequestAdd={this.handleRequestAdd}

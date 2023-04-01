@@ -9,11 +9,8 @@
 @import "../Display.scss";
 @import "../Colors.scss";
 
-.header {
-  background-color: $headerBGColor;
-}
-
 .headerContainer {
-  @include flexView(row-reverse, flex-start !important, center);
-  margin-right: 20px !important;
+  @include flexView(row, flex-start, center);
+  margin: 5px;
+  width: 100%;
 }

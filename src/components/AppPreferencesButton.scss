@@ -11,46 +11,42 @@
 @import "../Colors.scss";
 @import "../Sizes.scss";
 
-.prefDropDown {
-  left: auto !important;
-  margin-top: 7px;
-  right: 0;
-  z-index: 1100 !important;
-}
-
-.prefButton {
-  color: #ffffff;
-  font-size: $menuIconSize;
-  &:hover {
-    color: $menuIconOkHoverColor;
-    --rotation-degree-start: 90deg !important;
-    --rotation-degree-end: -90deg !important;
-    @include rotater(1s, infinite);
-  }
-}
-
 .prefButtonContainer {
   @include flexView(row, center, center);
 
   color: $menuIconColor;
   height: 100%;
-  margin-left: $menuIconSpace;
-  padding-top: 2px;
-}
 
-.prefButtonToggle {
-  box-shadow: unset !important;
-}
+  .prefDropDown {
+    left: auto !important;
+    right: 0;
+    z-index: 1100 !important;
 
-.prefItemChecked {
-  margin-right: $menuIconSpace;
-  width: 20px;
-}
+    .prefItemContainer {
+      @include flexCenterView(row);
 
-.prefItemContainer {
-  @include flexCenterView(row);
-}
+      .prefItemText {
+        font-size: 12px;
+      }
 
-.prefItemText {
-  font-size: 12px;
+      .prefItemChecked {
+        width: 20px;
+      }
+    }
+  }
+
+  .prefButtonToggle {
+    box-shadow: unset !important;
+
+    .prefButton {
+      color: #ffffff;
+      font-size: $menuIconSize;
+      &:hover {
+        color: $menuIconOkHoverColor;
+        --rotation-degree-start: 90deg !important;
+        --rotation-degree-end: -90deg !important;
+        @include rotater(1s, infinite);
+      }
+    }
+  }
 }

@@ -14,7 +14,7 @@
   cursor: pointer;
   color: $menuIconColor;
   font-size: $menuIconSize;
-  padding-left: $menuIconSpace;
+
   &:hover {
     color: $menuIconAlertHoverColor;
     @include shaker(2s, infinite, 0s, x);

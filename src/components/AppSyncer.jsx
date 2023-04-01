@@ -8,14 +8,13 @@
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Upload, XSquare } from "react-bootstrap-icons";
 
 import taskService from "services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
-import AimoTooltip from "@aimo.ui/aimo-tooltip";
-
 import "./AppSyncer.scss";
-import { ArrowCounterclockwise, Upload } from "react-bootstrap-icons";
+import { Nav } from "react-bootstrap";
 
 const AppSyncer = () => {
   const dispatch = useDispatch();
@@ -43,15 +42,14 @@ const AppSyncer = () => {
   };
 
   return (
-    <div className="syncButtonsContainer">
-      <ArrowCounterclockwise
-        className={revertClassName}
-        onClick={handleRevertTasks}
-      />
-      <AimoTooltip target="menu_undo">Revert to last synced data</AimoTooltip>
-      <Upload className={uploadClassName} onClick={handleUploadTasks} />
-      <AimoTooltip target="menu_upload">Upload data to server</AimoTooltip>
-    </div>
+    <React.Fragment>
+      <Nav.Link>
+        <XSquare className={revertClassName} onClick={handleRevertTasks} />
+      </Nav.Link>
+      <Nav.Link>
+        <Upload className={uploadClassName} onClick={handleUploadTasks} />
+      </Nav.Link>
+    </React.Fragment>
   );
 };
 

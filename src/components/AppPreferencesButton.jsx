@@ -7,7 +7,7 @@
  */
 
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Dropdown } from "react-bootstrap";
+import { Dropdown, Nav } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { preferencesChange } from "reducers/PreferencesReducer";
@@ -15,7 +15,7 @@ import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppPreferencesButton.scss";
 import React from "react";
-import { Check2, Gear } from "react-bootstrap-icons";
+import { ArrowCounterclockwise, Check2, Gear } from "react-bootstrap-icons";
 
 const AppPreferencesButton = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const AppPreferencesButton = () => {
 
   return (
     <React.Fragment>
-      <Dropdown className="prefButtonContainer" id="menu_preferences">
+      <Dropdown className="nav-link prefButtonContainer" id="menu_preferences">
         <Dropdown.Toggle
           variant="link"
           bsPrefix="p-0"
@@ -58,7 +58,6 @@ const AppPreferencesButton = () => {
           </NavDropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <AimoTooltip target="menu_preferences">Preferences</AimoTooltip>
     </React.Fragment>
   );
 };

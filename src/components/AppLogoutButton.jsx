@@ -14,6 +14,7 @@ import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
 import "./AppLogoutButton.scss";
 import { BoxArrowRight } from "react-bootstrap-icons";
+import { Nav } from "react-bootstrap";
 
 const AppLogoutButton = () => {
   const doLogout = () => {
@@ -23,8 +24,9 @@ const AppLogoutButton = () => {
 
   return (
     <React.Fragment>
-      <BoxArrowRight className="signoutButton" onClick={doLogout} />
-      <AimoTooltip target="menu_logout">Logout from account</AimoTooltip>
+      <Nav.Link>
+        <BoxArrowRight className="signoutButton" onClick={doLogout} />
+      </Nav.Link>
     </React.Fragment>
   );
 };

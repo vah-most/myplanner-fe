@@ -9,7 +9,7 @@
 import CryptoJS from "crypto-js";
 
 import Config from "../Config.json";
-import { fakeGroups, fakeTasks } from "./FakeTasks";
+import { fakeTasks } from "./FakeTasks";
 import httpService from "./HttpService";
 import storageService from "./StorageService";
 
@@ -20,7 +20,7 @@ class TaskService {
   tasks = [];
 
   async reloadTasks() {
-    return fakeGroups;
+    return fakeTasks;
     const result = await httpService.get(this.serverAddress);
     if (httpService.isOk(result)) {
       const data = httpService.getData(result);
@@ -43,20 +43,6 @@ class TaskService {
     return this.tasks;
   };
 
-  getAllGroups = () => {
-    return fakeGroups;
-    let groups = new Set();
-
-    this.tasks.forEach((t) => {
-      if (!t.groups) return;
-      t.groups.forEach((g) => {
-        groups.add(g);
-      });
-    });
-
-    return Array.from(groups).sort();
-  };
-
   generateEmptyTask = () => {
     let task = {
       _id: null,
@@ -64,7 +50,7 @@ class TaskService {
       deadline: "",
       isCompleted: false,
       desc: "",
-      groups: [],
+      tags: [],
     };
 
     const newTaskPrefix = "New Task";

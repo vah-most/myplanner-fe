@@ -15,19 +15,7 @@ $footerHeight: 50px;
 $headerHeight: 50px;
 
 //----------------------- MENU ----------------------//
-:root {
-  --menu-icon-size: 20px;
-  --menu-icon-space: 10px;
-}
-@media (max-width: $minNormalWidth) {
-  :root {
-    --menu-icon-size: 15px;
-    --menu-icon-space: 5px;
-  }
-}
-
-$menuIconSize: var(--menu-icon-size);
-$menuIconSpace: var(--menu-icon-space);
+$menuIconSize: 1.2vw;
 
 //--------------------- Boxes ----------------------//
 $boxBorderRadius: 5px;
