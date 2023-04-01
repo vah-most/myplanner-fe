@@ -1,22 +1,20 @@
 /*
- * Created on Wed Jul 13 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Nav } from "react-bootstrap";
 import { Upload, XSquare } from "react-bootstrap-icons";
 
 import taskService from "services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
-import "./AppSyncer.scss";
-import { Nav } from "react-bootstrap";
+import "./HeaderSyncer.scss";
 
-const AppSyncer = () => {
+const HeaderSyncer = () => {
   const dispatch = useDispatch();
   const synced = useSelector((state) => state.sync.value);
 
@@ -53,4 +51,4 @@ const AppSyncer = () => {
   );
 };
 
-export default AppSyncer;
+export default HeaderSyncer;

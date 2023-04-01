@@ -6,18 +6,16 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Dropdown, Nav } from "react-bootstrap";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Dropdown, NavDropdown } from "react-bootstrap";
+import { Check2, Gear } from "react-bootstrap-icons";
 
 import { preferencesChange } from "reducers/PreferencesReducer";
-import AimoTooltip from "@aimo.ui/aimo-tooltip";
 
-import "./AppPreferencesButton.scss";
-import React from "react";
-import { ArrowCounterclockwise, Check2, Gear } from "react-bootstrap-icons";
+import "./HeaderPreferences.scss";
 
-const AppPreferencesButton = () => {
+const HeaderPreferences = () => {
   const dispatch = useDispatch();
   const preferences = useSelector((state) => state.preferences.value);
 
@@ -62,4 +60,4 @@ const AppPreferencesButton = () => {
   );
 };
 
-export default AppPreferencesButton;
+export default HeaderPreferences;

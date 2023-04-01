@@ -1,16 +1,17 @@
 /*
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
 import { Nav, Navbar } from "react-bootstrap";
 
-import AppSyncer from "components/AppSyncer";
-import AppPreferencesButton from "components/AppPreferencesButton";
-import AppLogoutButton from "components/AppLogoutButton";
+import HeaderSyncer from "./HeaderSyncer";
+import HeaderPreferences from "./HeaderPreferences";
+import HeaderLogout from "./HeaderLogout";
 
 import "./Header.scss";
+import HeaderLogo from "./HeaderLogo";
 
 const Header = ({ className }) => {
   return (
@@ -22,14 +23,16 @@ const Header = ({ className }) => {
           variant="dark"
           className={`px-3 m-0 bg-dark bg-gradient ${className}`}
         >
-          <Navbar.Brand>Aimo-Planner</Navbar.Brand>
+          <Navbar.Brand>
+            <HeaderLogo />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
             <Nav>
-              <AppSyncer />
-              <AppPreferencesButton />
-              <AppLogoutButton />
+              <HeaderSyncer />
+              <HeaderPreferences />
+              <HeaderLogout />
             </Nav>
           </Navbar.Collapse>
         </Navbar>

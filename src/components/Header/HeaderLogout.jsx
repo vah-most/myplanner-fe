@@ -7,16 +7,14 @@
  */
 
 import React from "react";
+import { Nav } from "react-bootstrap";
+import { BoxArrowRight } from "react-bootstrap-icons";
 
 import authService from "services/AuthService";
 
-import AimoTooltip from "@aimo.ui/aimo-tooltip";
+import "./HeaderLogout.scss";
 
-import "./AppLogoutButton.scss";
-import { BoxArrowRight } from "react-bootstrap-icons";
-import { Nav } from "react-bootstrap";
-
-const AppLogoutButton = () => {
+const HeaderLogout = () => {
   const doLogout = () => {
     authService.logout();
     window.location = "/";
@@ -31,4 +29,4 @@ const AppLogoutButton = () => {
   );
 };
 
-export default AppLogoutButton;
+export default HeaderLogout;
