@@ -1,7 +1,5 @@
 /*
- * Created on Sat Jun 25 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
@@ -10,19 +8,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { KEY_CODES } from "utils/utils";
-import taskService from "../services/TaskService";
+import taskService from "../../services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
 
 import AimoTable from "@aimo.ui/aimo-table";
-import AppTaskListItemInfo from "./AppTaskListItemInfo";
-import AppTaskListItemGroups from "./AppTaskListItemGroups";
-import AppTaskListItemDeadline from "./AppTaskListItemDeadline";
-import AppTaskListItemCompleted from "./AppTaskListItemCompleted";
-import Header from "./Header";
+import TaskListItemInfo from "./TaskListItemInfo";
+import TaskListItemGroups from "./TaskListItemGroups";
+import TaskListItemDeadline from "./TaskListItemDeadline";
+import TaskListItemCompleted from "./TaskListItemCompleted";
+import Header from "../Header";
 
-import "./AppTaskList.scss";
+import "./TaskList.scss";
 
-class AppTaskList extends Component {
+class TaskList extends Component {
   state = {
     editingTask: {},
     editingTaskErrors: {},
@@ -225,7 +223,7 @@ class AppTaskList extends Component {
         headerTitle: "Task",
         headerClassName: "",
         isSortable: true,
-        renderFunc: (task) => <AppTaskListItemInfo task={task} />,
+        renderFunc: (task) => <TaskListItemInfo task={task} />,
       },
       tags: {
         headerTitle: "Tags",
@@ -233,7 +231,7 @@ class AppTaskList extends Component {
         headerClassName: "align-middle taskTableCenterHeader",
         cellClassName: "align-middle col-2",
         renderFunc: (task) => {
-          return <AppTaskListItemGroups groups={task.tags} />;
+          return <TaskListItemGroups groups={task.tags} />;
         },
       },
       deadline: {
@@ -241,9 +239,7 @@ class AppTaskList extends Component {
         isSortable: true,
         headerClassName: "col-2 taskTableCenterHeader",
         cellClassName: "col-2 text-center",
-        renderFunc: (task) => (
-          <AppTaskListItemDeadline deadline={task.deadline} />
-        ),
+        renderFunc: (task) => <TaskListItemDeadline deadline={task.deadline} />,
       },
       isCompleted: {
         headerTitle: "Done",
@@ -251,7 +247,7 @@ class AppTaskList extends Component {
         headerClassName: "taskTableCenterHeader",
         cellClassName: "text-center col-1",
         renderFunc: (task) => (
-          <AppTaskListItemCompleted
+          <TaskListItemCompleted
             taskId={task._id}
             value={task.isCompleted}
             onChange={() =>
@@ -262,7 +258,7 @@ class AppTaskList extends Component {
       },
     };
     return (
-      <div className={`${className} mainView`}>
+      <div className={`taskListContainer ${className}`}>
         <div
           className={
             editMode ? "taskTableContainerEditMode" : "taskTableContainer"
@@ -297,4 +293,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { syncStatusChange };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppTaskList);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskList);

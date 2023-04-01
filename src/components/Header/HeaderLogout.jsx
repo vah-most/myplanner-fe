@@ -1,7 +1,5 @@
 /*
- * Created on Fri Jul 22 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */

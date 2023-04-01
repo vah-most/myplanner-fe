@@ -1,14 +1,12 @@
 /*
- * Created on Sat Jun 25 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../Colors.scss";
-@import "../Display.scss";
-@import "../Sizes.scss";
+@import "../../Colors.scss";
+@import "../../Display.scss";
+@import "../../Sizes.scss";
 
 .completedTaskRow {
   background-color: $rowDoneBGColor;
@@ -19,7 +17,7 @@
   min-height: $headerHeight;
 }
 
-.mainView {
+.taskListContainer {
   @include flexView(row);
 }
 

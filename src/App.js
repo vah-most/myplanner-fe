@@ -12,8 +12,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { store } from "./Store";
 import authService from "services/AuthService";
-import AppMainView from "components/AppMainView";
 import AppLoginPage from "components/AppLoginPage";
+import Page from "pages/Page";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
@@ -41,7 +41,7 @@ class App extends React.Component {
           <div className="App">
             {user ? (
               <Routes>
-                <Route path="/" index element={<AppMainView user={user} />} />;
+                <Route path="/" index element={<Page user={user} />} />;
                 <Route path="*" element={<Navigate to="/" />} />
               </Routes>
             ) : (
