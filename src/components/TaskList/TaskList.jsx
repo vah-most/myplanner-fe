@@ -13,7 +13,7 @@ import { syncStatusChange } from "reducers/SyncReducer";
 
 import AimoTable from "@aimo.ui/aimo-table";
 import TaskListItemInfo from "./TaskListItemInfo";
-import TaskListItemGroups from "./TaskListItemGroups";
+import TaskListItemTags from "./TaskListItemTags";
 import TaskListItemDeadline from "./TaskListItemDeadline";
 import TaskListItemCompleted from "./TaskListItemCompleted";
 import Header from "../Header";
@@ -25,8 +25,6 @@ class TaskList extends Component {
     editingTask: {},
     editingTaskErrors: {},
     editMode: false,
-    sortBy: "",
-    sortDirAsc: true,
     tableRowsPerPage: 10,
     tasks: [],
   };
@@ -36,10 +34,8 @@ class TaskList extends Component {
 
     await taskService.reloadTasks();
     const tasks = await taskService.getTasks();
-    const sortBy = "deadline"; //TODO: maybe it should remember last sorted column
     this.setState({
       tasks,
-      sortBy,
       editingTask: { ...taskService.generateEmptyTask() },
     });
   };
@@ -95,10 +91,6 @@ class TaskList extends Component {
 
   handleEditorClose = () => {
     this.setState({ editMode: false });
-  };
-
-  handleSort = (sortBy, sortDirAsc) => {
-    this.setState({ sortBy, sortDirAsc });
   };
 
   saveTaskListChanges = (modifiedTasks) => {
@@ -184,7 +176,8 @@ class TaskList extends Component {
   };
 
   sortTasks = (tasks) => {
-    const { sortBy, sortDirAsc } = this.state;
+    const sortBy = "deadline";
+    const sortDirAsc = true;
 
     tasks.sort((task1, task2) => {
       if (sortBy === "" || !(sortBy in task1)) return -1;
@@ -205,25 +198,29 @@ class TaskList extends Component {
     return tasks;
   };
 
-  render() {
-    const {
-      editingTask,
-      editingTaskErrors,
-      editMode,
-      sortBy,
-      sortDirAsc,
-      tableRowsPerPage,
-      tasks,
-    } = this.state;
-    const { className } = this.props;
-
-    const renderFuncs = {};
-    const columnProps = {
-      title: {
-        headerTitle: "Task",
+  getColumnProps = () => {
+    return {
+      info: {
         headerClassName: "",
+        headerTitle: "Task",
         isSortable: true,
-        renderFunc: (task) => <TaskListItemInfo task={task} />,
+        renderFunc: ({ id, info }) => {
+          return (
+            <TaskListItemInfo desc={info.desc} id={id} title={info.title} />
+          );
+        },
+        sortFunc: (info1, info2, dirAsc) => {
+          const t1Title = info1.title ? info1.title.toLowerCase() : "";
+          const t1Desc = info1.desc ? info1.desc.toLowerCase() : "";
+          const t2Title = info2.title ? info2.title.toLowerCase() : "";
+          const t2Desc = info2.desc ? info2.desc.toLowerCase() : "";
+
+          if (t1Title === t2Title)
+            if (t1Desc > t2Desc) return dirAsc ? 1 : -1;
+            else return dirAsc ? -1 : 1;
+          if (t1Title > t2Title) return dirAsc ? 1 : -1;
+          return dirAsc ? -1 : 1;
+        },
       },
       tags: {
         headerTitle: "Tags",
@@ -231,7 +228,7 @@ class TaskList extends Component {
         headerClassName: "align-middle taskTableCenterHeader",
         cellClassName: "align-middle col-2",
         renderFunc: (task) => {
-          return <TaskListItemGroups groups={task.tags} />;
+          return <TaskListItemTags tags={task.tags} />;
         },
       },
       deadline: {
@@ -257,6 +254,34 @@ class TaskList extends Component {
         ),
       },
     };
+  };
+
+  render() {
+    const {
+      editingTask,
+      editingTaskErrors,
+      editMode,
+      sortBy,
+      sortDirAsc,
+      tableRowsPerPage,
+      tasks,
+    } = this.state;
+    const { className } = this.props;
+
+    const sortedTasks = this.sortTasks(tasks);
+    const data = sortedTasks.map((task) => {
+      return {
+        id: task._id,
+        info: {
+          title: task.title ? task.title : "",
+          desc: task.desc ? task.desc : "",
+        },
+        deadline: task.deadline,
+        isCompleted: task.isCompleted,
+        tags: task.tags.sort(),
+      };
+    });
+
     return (
       <div className={`taskListContainer ${className}`}>
         <div
@@ -267,13 +292,8 @@ class TaskList extends Component {
           <Header className="mainHeader" />
           <AimoTable
             className="taskTable"
-            data={tasks}
-            columnProps={columnProps}
-            renderFuncs={renderFuncs}
-            onRequestAdd={this.handleRequestAdd}
-            onRequestEdit={this.handleRequestEdit}
-            onRequestDelete={this.handleRequestDelete}
-            onSort={this.handleSort}
+            data={data}
+            columnProps={this.getColumnProps()}
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
             sortedDirAsc={sortDirAsc}

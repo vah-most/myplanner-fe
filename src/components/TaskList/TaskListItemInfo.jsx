@@ -8,15 +8,15 @@ import React from "react";
 
 import "./TaskListItemInfo.scss";
 
-function TaskListItemInfo({ task }) {
+function TaskListItemInfo({ desc, id, title }) {
   return (
     <div className="taskListItemInfo">
       <div>
-        <span className="taskTitle">{task.title}</span>
+        <span className="taskTitle">{title}</span>
       </div>
       <div className="taskDescContainer">
-        <span className="taskDesc" id={`task_${task._id}`}>
-          {task.desc}
+        <span className="taskDesc" id={`task_${id}`}>
+          {desc}
         </span>
       </div>
     </div>

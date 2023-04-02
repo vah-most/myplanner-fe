@@ -19,7 +19,7 @@ const Header = ({ className }) => {
       <header>
         <Navbar
           collapseOnSelect
-          expand="lg"
+          expand="sm"
           variant="dark"
           className={`px-3 m-0 bg-dark bg-gradient ${className}`}
         >
