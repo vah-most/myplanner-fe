@@ -209,6 +209,12 @@ class TaskList extends Component {
             <TaskListItemInfo desc={info.desc} id={id} title={info.title} />
           );
         },
+        searchFunc: (row, search) => {
+          const haystack =
+            `${row.info.title}|${row.info.desc}`.toLocaleLowerCase();
+          const needle = search.toLocaleLowerCase();
+          return haystack.includes(needle);
+        },
         sortFunc: (info1, info2, dirAsc) => {
           const t1Title = info1.title ? info1.title.toLowerCase() : "";
           const t1Desc = info1.desc ? info1.desc.toLowerCase() : "";
@@ -291,12 +297,14 @@ class TaskList extends Component {
         >
           <Header className="mainHeader" />
           <AimoTable
+            disableSearchOperation={false}
             className="taskTable"
-            data={data}
             columnProps={this.getColumnProps()}
+            data={data}
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
             sortedDirAsc={sortDirAsc}
+            title={"My Tasks"}
           />
         </div>
         {this.props.children}
