@@ -29,9 +29,10 @@ const HeaderPreferences = () => {
         <Dropdown.Toggle
           variant="link"
           bsPrefix="p-0"
-          className="prefButtonToggle"
+          className="nav-link prefButtonToggle"
         >
           <Gear className="prefButton" />
+          <span className="headerItemText">Preferences</span>
         </Dropdown.Toggle>
         <Dropdown.Menu className="dropdown-menu prefDropDown">
           <NavDropdown.Item

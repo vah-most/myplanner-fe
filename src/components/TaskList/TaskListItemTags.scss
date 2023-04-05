@@ -6,16 +6,18 @@
 
 @import "../../Display.scss";
 @import "../../Sizes.scss";
+@import "../../Texts.scss";
 
 .taskTags {
   @include flexView(row);
   flex-wrap: wrap;
 
   max-height: $taskRowMaxHeight;
-  overflow-y: auto;
   overflow-x: hidden;
-}
+  overflow-y: auto;
 
-.taskTagsItem {
-  margin: 2px;
+  .taskTagsItem {
+    @include taskListTagsTextProps();
+    margin: 2px;
+  }
 }

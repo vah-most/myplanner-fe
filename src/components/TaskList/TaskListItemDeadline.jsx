@@ -42,7 +42,7 @@ const TaskListItemDeadline = ({ deadline }) => {
         dueTitle = "Yesterday";
         break;
       default:
-        if (due < 0) dueTitle = `Passed ${-due} days`;
+        if (due < 0) dueTitle = `${-due} days ago`;
         else dueTitle = `In ${due} days`;
     }
 

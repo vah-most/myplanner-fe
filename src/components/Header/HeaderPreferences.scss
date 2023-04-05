@@ -8,6 +8,7 @@
 @import "../../Display.scss";
 @import "../../Colors.scss";
 @import "../../Sizes.scss";
+@import "../../texts.scss";
 
 .prefButtonContainer {
   @include flexView(row, center, center);
@@ -17,15 +18,13 @@
 
   .prefDropDown {
     left: auto !important;
+    margin: 5px 0px;
     right: 0;
     z-index: 1100 !important;
 
     .prefItemContainer {
-      @include flexCenterView(row);
-
-      .prefItemText {
-        font-size: 12px;
-      }
+      @include flexView(row, flex-start, center);
+      @include headerMenuTextProps();
 
       .prefItemChecked {
         width: 20px;
@@ -38,7 +37,6 @@
 
     .prefButton {
       color: #ffffff;
-      font-size: $menuIconSize;
       &:hover {
         color: $menuIconOkHoverColor;
         --rotation-degree-start: 90deg !important;

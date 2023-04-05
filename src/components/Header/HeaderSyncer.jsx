@@ -43,9 +43,15 @@ const HeaderSyncer = () => {
     <React.Fragment>
       <Nav.Link>
         <XSquare className={revertClassName} onClick={handleRevertTasks} />
+        <span className={`headerItemText ${revertClassName}`}>
+          Revert Changes
+        </span>
       </Nav.Link>
       <Nav.Link>
         <Upload className={uploadClassName} onClick={handleUploadTasks} />
+        <span className={`headerItemText ${uploadClassName}`}>
+          Store Changes
+        </span>
       </Nav.Link>
     </React.Fragment>
   );

@@ -22,6 +22,7 @@ const HeaderLogout = () => {
     <React.Fragment>
       <Nav.Link>
         <BoxArrowRight className="signoutButton" onClick={doLogout} />
+        <span className="headerItemText">SignOut</span>
       </Nav.Link>
     </React.Fragment>
   );

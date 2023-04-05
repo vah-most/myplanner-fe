@@ -295,12 +295,12 @@ class TaskList extends Component {
             editMode ? "taskTableContainerEditMode" : "taskTableContainer"
           }
         >
-          <Header className="mainHeader" />
           <AimoTable
             disableSearchOperation={false}
             className="taskTable"
             columnProps={this.getColumnProps()}
             data={data}
+            headerClassName="taskTableHeader"
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
             sortedDirAsc={sortDirAsc}

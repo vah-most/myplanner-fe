@@ -27,7 +27,10 @@ const Header = ({ className }) => {
             <HeaderLogo />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            className="headerItemList bg-dark bg-gradient px-3"
+          >
             <Nav className="me-auto"></Nav>
             <Nav>
               <HeaderSyncer />

@@ -7,5 +7,11 @@
 @import "../../Sizes.scss";
 
 .pageContent {
-  height: calc(100vh - $footerHeight);
+  height: calc(100vh - $footerHeight - $headerHeight);
+  width: 100%;
+}
+
+.mainHeader {
+  height: $headerHeight;
+  min-height: $headerHeight;
 }

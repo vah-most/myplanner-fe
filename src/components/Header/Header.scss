@@ -4,11 +4,36 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Display.scss";
 @import "../../Colors.scss";
+@import "../../Display.scss";
+@import "../../Sizes.scss";
 
 .headerContainer {
   @include flexView(row, flex-start, center);
   margin: 5px;
   width: 100%;
+}
+
+.headerItemList {
+  border-radius: 5px;
+  color: $headerTextColor;
+  font-size: $menuIconSize;
+  padding: 5px 0px;
+}
+
+.headerItemText {
+  padding: 0px 5px;
+  position: relative;
+  top: 2px;
+  color: $headerTextColor;
+}
+
+@media (min-width: 576px) {
+  .headerItemList {
+    padding: 0px;
+  }
+
+  .headerItemText {
+    display: none;
+  }
 }

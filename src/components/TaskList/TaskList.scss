@@ -7,14 +7,10 @@
 @import "../../Colors.scss";
 @import "../../Display.scss";
 @import "../../Sizes.scss";
+@import "../../Texts.scss";
 
 .completedTaskRow {
   background-color: $rowDoneBGColor;
-}
-
-.mainHeader {
-  height: $headerHeight;
-  min-height: $headerHeight;
 }
 
 .taskListContainer {
@@ -34,6 +30,10 @@
   width: 100%;
   height: 100%;
   overflow: auto;
+
+  .taskTableHeader {
+    @include taskListHeaderTextProps();
+  }
 }
 
 .taskTableCenterHeader {

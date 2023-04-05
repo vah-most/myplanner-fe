@@ -17,8 +17,7 @@
 }
 
 .deadlineText {
-  font-size: 12px;
-  font-weight: bold;
+  @include taskListDeadlineTextProps();
 }
 
 .deadlineTextAlert {
@@ -31,12 +30,9 @@
 
 .deadlineTextPassed {
   color: $deadlinePassedTextColor;
-  text-decoration: line-through;
 }
 
 .taskDue {
-  @include taskDeadlineTextProps();
-
   &:hover {
     > .taskDueEdit {
       display: block !important;

@@ -13,7 +13,7 @@
   min-width: 100px;
 
   .taskTitle {
-    @include taskTitleTextProps();
+    @include taskListTitleTextProps();
   }
 
   .taskDescContainer {
@@ -21,7 +21,7 @@
   }
 
   .taskDesc {
-    @include taskDescTextProps();
+    @include taskListDescTextProps();
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
