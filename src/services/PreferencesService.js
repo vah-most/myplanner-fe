@@ -11,7 +11,7 @@ const defaultPreferences = {
 };
 
 class PreferencesService {
-  preferencesToken = "prefs";
+  preferencesToken = "mp-prefs";
   preferences = {};
 
   constructor() {

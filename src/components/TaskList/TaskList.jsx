@@ -167,6 +167,16 @@ class TaskList extends Component {
     );
   };
 
+  filterTasks = (tasks) => {
+    const { preferences } = this.props;
+    const filteredTasks = tasks.filter((t) => {
+      if (preferences.hideCompletedTasks && t.isCompleted) return false;
+
+      return true;
+    });
+    return filteredTasks;
+  };
+
   sortTasks = (tasks) => {
     const sortBy = "deadline";
     const sortDirAsc = true;
@@ -266,7 +276,8 @@ class TaskList extends Component {
     } = this.state;
     const { className } = this.props;
 
-    const sortedTasks = this.sortTasks(tasks);
+    const filteredTasks = this.filterTasks(tasks);
+    const sortedTasks = this.sortTasks(filteredTasks);
     const data = sortedTasks.map((task) => {
       return {
         id: task.id,
