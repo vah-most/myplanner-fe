@@ -10,19 +10,21 @@ import { connect } from "react-redux";
 import { KEY_CODES } from "utils/utils";
 import taskService from "../../services/TaskService";
 import { syncStatusChange } from "reducers/SyncReducer";
-
 import AimoTable from "@aimo.ui/aimo-table";
+
+import TaskEditor from "components/TaskEditor";
 import TaskListItemInfo from "./TaskListItemInfo";
 import TaskListItemTags from "./TaskListItemTags";
 import TaskListItemDeadline from "./TaskListItemDeadline";
 import TaskListItemCompleted from "./TaskListItemCompleted";
-import Header from "../Header";
+import Button from "components/common/Button";
+import Modal from "components/common/Modal";
 
 import "./TaskList.scss";
 
 class TaskList extends Component {
   state = {
-    editingTask: {},
+    editingTask: { ...taskService.generateEmptyTask() },
     editingTaskErrors: {},
     editMode: false,
     tableRowsPerPage: 10,
@@ -128,23 +130,6 @@ class TaskList extends Component {
     return true;
   };
 
-  handleTaskEdit = (id, name, value) => {
-    let { tasks } = this.state;
-
-    const taskIndex = tasks.findIndex((t) => t._id === id);
-    tasks = [...tasks];
-
-    let task = null;
-    if (taskIndex < 0) {
-      task = { ...taskService.generateEmptyTask() };
-    } else {
-      task = { ...tasks[taskIndex] };
-    }
-    task[name] = value;
-
-    this.saveTask(task);
-  };
-
   handleTaskDelete = (id) => {
     let tasks = [...this.state.tasks];
 
@@ -173,6 +158,22 @@ class TaskList extends Component {
     if (this.saveTask(task)) {
       this.handleEditorClose();
     }
+  };
+
+  renderTaskListTitle = () => {
+    return (
+      <div className="taskListTitleContainer">
+        <span>Tasks</span>
+        <Button
+          className="addTaskButton"
+          onClick={() => {
+            this.setState({ editingTask: {}, editMode: true });
+          }}
+        >
+          +
+        </Button>
+      </div>
+    );
   };
 
   sortTasks = (tasks) => {
@@ -304,10 +305,24 @@ class TaskList extends Component {
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
             sortedDirAsc={sortDirAsc}
-            title={"My Tasks"}
+            title={this.renderTaskListTitle()}
           />
         </div>
         {this.props.children}
+        <Modal
+          onClose={() => {
+            this.setState({ editMode: false });
+          }}
+          title={editingTask && editingTask.id ? editingTask.title : "New Task"}
+          visible={editMode}
+        >
+          <TaskEditor
+            onChange={this.handleTaskSubmit}
+            task={editingTask}
+            taskErrors={editingTaskErrors}
+            tasks={sortedTasks}
+          />
+        </Modal>
       </div>
     );
   }

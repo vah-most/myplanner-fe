@@ -1,7 +1,5 @@
 /*
- * Created on Sat Jun 25 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
@@ -9,9 +7,9 @@
 import React, { useState } from "react";
 import { X } from "react-bootstrap-icons";
 
-import "./AppTextBubble.scss";
+import "./TextBubble.scss";
 
-function AppTextBubble({
+function TextBubble({
   backgroundColor,
   className = "",
   onDelete,
@@ -47,4 +45,4 @@ function AppTextBubble({
   );
 }
 
-export default AppTextBubble;
+export default TextBubble;

@@ -53,23 +53,13 @@ class TaskService {
       tags: [],
     };
 
-    const newTaskPrefix = "New Task";
-    const defaultTasks = this.tasks.filter((t) =>
-      t.title.startsWith(newTaskPrefix)
-    );
-
-    let index = 1;
-    do {
-      task.title = newTaskPrefix + (index > 1 ? ` ${index}` : "");
-      index++;
-    } while (defaultTasks.find((t) => t.title === task.title));
-
     return task;
   };
 
   setTasks = async (tasks) => {
     this.tasks = tasks;
   };
+
   generateNewTaskId = () => {
     let taskId = 0;
 
@@ -86,7 +76,7 @@ class TaskService {
 
   checkTaskErrors = (task) => {
     if (!task.title || task.title.length === 0)
-      return { title: "Please set title first." };
+      return { title: "Please enter task title" };
 
     return null;
   };

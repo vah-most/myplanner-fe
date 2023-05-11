@@ -1,0 +1,17 @@
+/*
+ * Copyright (c) 2023 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../../Colors.scss";
+@import "../../../Display.scss";
+
+.mpInput {
+  @include flexView(column, center, flex-start);
+
+  .mpInputError {
+    color: $colorAlert;
+    font-size: 10px;
+  }
+}

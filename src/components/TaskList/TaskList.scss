@@ -9,20 +9,32 @@
 @import "../../Sizes.scss";
 @import "../../Texts.scss";
 
+$addButtonSize: 25px;
+.addTaskButton {
+  @include flexCenterView();
+
+  border-radius: 50%;
+  height: $addButtonSize;
+  width: $addButtonSize;
+  margin-inline-start: 10px;
+}
+
 .completedTaskRow {
   background-color: $rowDoneBGColor;
 }
 
 .taskListContainer {
   @include flexView(row);
+
+  position: relative;
 }
 
 .table {
   width: 98%;
 }
 
-.taskEditorView {
-  width: 40%;
+.taskListTitleContainer {
+  @include flexCenterView(row);
 }
 
 .taskTable {
@@ -45,14 +57,4 @@
 .taskTableContainerEditMode {
   @include flexView(column);
   width: 100%;
-}
-
-@media (max-width: $minNormalWidth) {
-  .taskEditorView {
-    width: 100%;
-  }
-
-  .taskTableContainerEditMode {
-    display: none;
-  }
 }

@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2023 Mostafa Vahabzadeh
+ *
+ * License: MIT "https://opensource.org/licenses/MIT"
+ */
+
+@import "../../Display.scss";
+
+.taskEditorRow {
+  @include flexView(row, space-between, center);
+
+  width: 100%;
+  margin-bottom: 10px;
+
+  .taskEditorItemLabel {
+    margin-inline-end: 5px;
+  }
+}

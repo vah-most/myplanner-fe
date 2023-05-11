@@ -1,29 +1,26 @@
 /*
- * Created on Sun Jul 17 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-@import "../../Colors.scss";
-@import "../../Texts.scss";
+@import "../../../Colors.scss";
+@import "../../../Texts.scss";
 
-.datePicker {
+.mpDatePicker {
+}
+
+.mpDatePickerCalendar {
   z-index: 1000;
 }
 
-.datePickerCalendar {
-  z-index: 1000;
-}
-
-.datePickerCalendarIcon {
+.mpDatePickerCalendarIcon {
   &:hover {
     color: $datePickerIconHoverColor;
   }
 }
 
-.datePickerIcon {
+.mpDatePickerIcon {
   font-size: 16px;
   font-weight: 100;
 }

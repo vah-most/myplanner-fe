@@ -28,6 +28,7 @@ $colorWhite: #ffffff;
 //---------------------- GENERIC ---------------------//
 $colorAlert: #dc3545;
 $colorDisabled: #808080;
+$colorDisabledTransparent: #808080b9;
 $colorError: $colorRed;
 $colorOk: #198754;
 $colorPlaceholder: #808080;
@@ -66,6 +67,10 @@ $menuIconAlertHoverColor: $colorAlert;
 $menuIconColor: $colorWhite;
 $menuIconDisabledColor: $colorDisabled;
 $menuIconOkHoverColor: $colorDimBlue;
+
+$modalBGColor: $colorWhite;
+$modalBorderColor: $colorDark;
+$modalCoverBGColor: $colorDisabledTransparent;
 
 $paginationBGColor: $colorWhite;
 $paginationBorderColor: $colorLightGray;

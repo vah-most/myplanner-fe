@@ -4,7 +4,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import AppTextBubble from "../common/AppTextBubble";
+import TextBubble from "../common/TextBubble";
 
 import "./TaskListItemTags.scss";
 
@@ -12,7 +12,7 @@ const TaskListItemTags = ({ tags }) => {
   return (
     <div className="taskTags">
       {tags.map((tag, i) => {
-        return <AppTextBubble key={i} className="taskTagsItem" text={tag} />;
+        return <TextBubble key={i} className="taskTagsItem" text={tag} />;
       })}
     </div>
   );
