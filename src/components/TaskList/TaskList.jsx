@@ -34,8 +34,7 @@ class TaskList extends Component {
   componentDidMount = async () => {
     document.addEventListener("keydown", this.handleKeyDown, false);
 
-    await taskService.reloadTasks();
-    const tasks = await taskService.getTasks();
+    const tasks = await taskService.pullTasks();
     this.setState({
       tasks,
       editingTask: null,
@@ -49,13 +48,13 @@ class TaskList extends Component {
   componentDidUpdate = async (prevProps, prevState) => {
     if (prevProps.synced === true && this.props.synced === false) {
       let editingTask = { ...this.state.editingTask };
-      const tasks = await taskService.getTasks();
+      const tasks = taskService.getTasks();
       if (editingTask) {
         editingTask = tasks.find((t) => t.id === editingTask.id);
       }
       this.setState({ tasks, editingTask });
     } else if (prevProps.synced === false && this.props.synced === true) {
-      const tasks = await taskService.getTasks();
+      const tasks = taskService.getTasks();
       this.setState({ tasks, editMode: false });
     }
   };
@@ -99,10 +98,7 @@ class TaskList extends Component {
 
     this.setState({ tasks: modifiedTasks });
 
-    /**
-     * TODO: reimplement fetching and client-side storage of tasks
-     */
-    /* this.props.syncStatusChange(false); */
+    this.props.syncStatusChange(false);
   };
 
   saveTask = (task) => {

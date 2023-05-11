@@ -10,7 +10,7 @@ import jwtDecode from "jwt-decode";
 
 import Config from "../Config.json";
 import httpService from "./HttpService";
-import storageService from "./StorageService";
+import StorageService from "./StorageService";
 
 class AuthService {
   authAPIEndpoint = `${Config.APIAddress}/auth`;
@@ -22,11 +22,11 @@ class AuthService {
   }
 
   getAuthKey() {
-    return storageService.getItem(this.loginJwtToken);
+    return StorageService.getItem(this.loginJwtToken);
   }
 
   getCurrentUser() {
-    const jwt = storageService.getItem(this.loginJwtToken);
+    const jwt = StorageService.getItem(this.loginJwtToken);
 
     const userCreds = JSON.parse(jwt);
     if (userCreds && userCreds.username === "guest") {
@@ -52,17 +52,17 @@ class AuthService {
         password: password,
       });
     }
-    storageService.setItem(this.loginJwtToken, jwt);
+    StorageService.setItem(this.loginJwtToken, jwt);
 
     return true;
   }
 
   logout() {
-    storageService.removeItem(this.loginJwtToken);
+    StorageService.removeItem(this.loginJwtToken);
   }
 
   handleAuthError = (error) => {
-    if (storageService.getItem(this.loginJwtToken)) this.logout();
+    if (StorageService.getItem(this.loginJwtToken)) this.logout();
     throw error;
   };
 }

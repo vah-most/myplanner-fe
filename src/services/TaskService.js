@@ -11,37 +11,38 @@ import CryptoJS from "crypto-js";
 import Config from "../Config.json";
 import { fakeTasks } from "./FakeTasks";
 import httpService from "./HttpService";
-import storageService from "./StorageService";
+import StorageService from "./StorageService";
 
 class TaskService {
-  storageToken = "tasks";
+  storageToken = "mp-tasks";
   serverAddress = `${Config.APIAddress}/tasks`;
 
-  tasks = [];
-
-  async reloadTasks() {
-    return fakeTasks;
-    const result = await httpService.get(this.serverAddress);
-    if (httpService.isOk(result)) {
-      const data = httpService.getData(result);
-      this.tasks = data ? data : [];
-    }
-    storageService.setItem(this.storageToken, this.tasks);
+  setTasks(tasks) {
+    StorageService.setItem(this.storageToken, tasks);
+    return true;
   }
 
-  async storeTasks() {
-    storageService.setItem(this.storageToken, this.tasks);
-    const result = await httpService.post(this.serverAddress, {
-      tasks: this.tasks,
-    });
-
-    return result && result.status && result.status === 200;
+  getTasks() {
+    return StorageService.getItem(this.storageToken);
   }
 
-  getTasks = async () => {
-    return fakeTasks;
-    return this.tasks;
-  };
+  async pushTasks() {
+    const tasks = this.getTasks();
+    /**
+     * TODO: Push Tasks to server.
+     */
+    return true;
+  }
+
+  async pullTasks() {
+    /**
+     * TODO: Pull Tasks from server.
+     */
+    const tasks = fakeTasks;
+
+    this.setTasks(tasks);
+    return tasks;
+  }
 
   generateEmptyTask = () => {
     let task = {
@@ -54,10 +55,6 @@ class TaskService {
     };
 
     return task;
-  };
-
-  setTasks = async (tasks) => {
-    this.tasks = tasks;
   };
 
   generateNewTaskId = () => {

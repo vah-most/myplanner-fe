@@ -28,14 +28,14 @@ const HeaderSyncer = () => {
   const handleUploadTasks = async () => {
     if (synced) return null;
 
-    await taskService.storeTasks();
+    await taskService.pushTasks();
     dispatch(syncStatusChange(true));
   };
 
   const handleRevertTasks = async () => {
     if (synced) return null;
 
-    await taskService.reloadTasks();
+    await taskService.pullTasks();
     dispatch(syncStatusChange(true));
   };
 

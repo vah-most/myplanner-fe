@@ -1,12 +1,10 @@
 /*
- * Created on Sat Jul 09 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-const { default: storageService } = require("./StorageService");
+import StorageService from "./StorageService";
 
 const defaultPreferences = {
   hideCompletedTasks: false,
@@ -19,7 +17,7 @@ class PreferencesService {
   constructor() {
     this.preferences = { ...defaultPreferences };
     //TODO: we should properly load preferences from server
-    storageService.setItem(this.preferencesToken, this.preferences);
+    StorageService.setItem(this.preferencesToken, this.preferences);
   }
 
   get() {
@@ -32,12 +30,12 @@ class PreferencesService {
 
   set(newPreferences) {
     this.preferences = newPreferences;
-    storageService.setItem(this.preferencesToken, this.preferences);
+    StorageService.setItem(this.preferencesToken, this.preferences);
   }
 
   setProp(key, value) {
     this.preferences[key] = value;
-    storageService.setItem(this.preferencesToken, this.preferences);
+    StorageService.setItem(this.preferencesToken, this.preferences);
   }
 }
 
