@@ -12,8 +12,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { store } from "./Store";
 import authService from "services/AuthService";
-import AppLoginPage from "components/AppLoginPage";
-import Page from "pages/Page";
+import LoginPage from "pages/LoginPage";
+import Page from "components/Page";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.scss";
@@ -46,7 +46,7 @@ class App extends React.Component {
               </Routes>
             ) : (
               <Routes>
-                <Route path="/login" element={<AppLoginPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="*" element={<Navigate to="/login" />} />
               </Routes>
             )}

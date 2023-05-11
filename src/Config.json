@@ -1,5 +1,5 @@
 {
-  "APIAddress-alt": "https://aimo-planner.herokuapp.com/api",
   "APIAddress": "http://localhost:5000/api",
+  "AppName": "Aimo-Planner",
   "Copyright": "Copyright (c) 2023 Mostafa Vahabzadeh"
 }

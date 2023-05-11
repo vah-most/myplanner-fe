@@ -1,7 +1,5 @@
 /*
- * Created on Wed Jul 20 2022
- *
- * Copyright (c) 2022 Mostafa Vahabzadeh
+ * Copyright (c) 2023 Mostafa Vahabzadeh
  *
  * License: MIT "https://opensource.org/licenses/MIT"
  */
@@ -9,10 +7,10 @@
 import React, { Component } from "react";
 import MD5 from "crypto-js/md5";
 
-import authService from "../services/AuthService";
-import AppForm from "./common/AppForm";
+import authService from "services/AuthService";
+import Form from "components/common/Form";
 
-import "./AppLoginPage.scss";
+import "./LoginPage.scss";
 
 const loginInputs = [
   {
@@ -27,7 +25,7 @@ const loginInputs = [
   },
 ];
 
-class AppLogin extends Component {
+class LoginPage extends Component {
   state = {
     errors: {},
     values: {
@@ -79,7 +77,7 @@ class AppLogin extends Component {
     return (
       <div className="loginPage">
         <div className="loginContainer">
-          <AppForm
+          <Form
             errors={errors}
             inputs={loginInputs}
             onChange={this.handleChange}
@@ -92,4 +90,4 @@ class AppLogin extends Component {
   }
 }
 
-export default AppLogin;
+export default LoginPage;
