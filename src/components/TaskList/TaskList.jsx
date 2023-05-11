@@ -24,7 +24,7 @@ import "./TaskList.scss";
 
 class TaskList extends Component {
   state = {
-    editingTask: { ...taskService.generateEmptyTask() },
+    editingTask: null,
     editingTaskErrors: {},
     editMode: false,
     tableRowsPerPage: 10,
@@ -38,7 +38,7 @@ class TaskList extends Component {
     const tasks = await taskService.getTasks();
     this.setState({
       tasks,
-      editingTask: { ...taskService.generateEmptyTask() },
+      editingTask: null,
     });
   };
 
@@ -52,7 +52,6 @@ class TaskList extends Component {
       const tasks = await taskService.getTasks();
       if (editingTask) {
         editingTask = tasks.find((t) => t.id === editingTask.id);
-        if (!editingTask) editingTask = {};
       }
       this.setState({ tasks, editingTask });
     } else if (prevProps.synced === false && this.props.synced === true) {
@@ -72,7 +71,7 @@ class TaskList extends Component {
   handleRequestAdd = () => {
     this.setState({
       editMode: true,
-      editingTask: { ...taskService.generateEmptyTask() },
+      editingTask: null,
       editingTaskErrors: {},
     });
   };
@@ -100,7 +99,10 @@ class TaskList extends Component {
 
     this.setState({ tasks: modifiedTasks });
 
-    this.props.syncStatusChange(false);
+    /**
+     * TODO: reimplement fetching and client-side storage of tasks
+     */
+    /* this.props.syncStatusChange(false); */
   };
 
   saveTask = (task) => {
@@ -297,6 +299,7 @@ class TaskList extends Component {
             disableDeleteOperation={false}
             disableEditOperation={false}
             headerClassName="taskTableHeader"
+            onRequestDelete={this.handleRequestDelete}
             onRequestEdit={this.handleRequestEdit}
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
@@ -314,7 +317,9 @@ class TaskList extends Component {
         >
           <TaskEditor
             onChange={this.handleTaskSubmit}
-            task={editingTask}
+            task={
+              editingTask ? editingTask : { ...taskService.generateEmptyTask() }
+            }
             taskErrors={editingTaskErrors}
             tasks={sortedTasks}
           />
