@@ -4,7 +4,7 @@
  * License: MIT "https://opensource.org/licenses/MIT"
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 
 import { getExistingTaskTags } from "utils/taskUtils";
@@ -18,7 +18,7 @@ import TaskEditorRow from "components/TaskEditorRow";
 
 import "./TaskEditor.scss";
 
-const TaskEditor = ({ onChange, onClose, task, taskErrors, tasks }) => {
+const TaskEditor = ({ onChange, task, taskErrors, tasks }) => {
   const [taskProps, setTaskProps] = useState({ ...task });
 
   const handlePropChange = (prop, value) => {
@@ -30,6 +30,10 @@ const TaskEditor = ({ onChange, onClose, task, taskErrors, tasks }) => {
   const handleTaskSubmit = () => {
     onChange && onChange(taskProps);
   };
+
+  useEffect(() => {
+    setTaskProps({ ...task });
+  }, [task]);
 
   const allTags = new Set([...getExistingTaskTags(tasks), ...taskProps.tags]);
 

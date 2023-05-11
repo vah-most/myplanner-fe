@@ -162,12 +162,7 @@ class TaskList extends Component {
     return (
       <div className="taskListTitleContainer">
         <span>Tasks</span>
-        <Button
-          className="addTaskButton"
-          onClick={() => {
-            this.setState({ editingTask: {}, editMode: true });
-          }}
-        >
+        <Button className="addTaskButton" onClick={this.handleRequestAdd}>
           +
         </Button>
       </div>
@@ -299,7 +294,10 @@ class TaskList extends Component {
             className="taskTable"
             columnProps={this.getColumnProps()}
             data={data}
+            disableDeleteOperation={false}
+            disableEditOperation={false}
             headerClassName="taskTableHeader"
+            onRequestEdit={this.handleRequestEdit}
             rowsPerPage={tableRowsPerPage}
             sortedBy={sortBy}
             sortedDirAsc={sortDirAsc}
