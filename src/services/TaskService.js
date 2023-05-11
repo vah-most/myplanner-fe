@@ -45,7 +45,7 @@ class TaskService {
 
   generateEmptyTask = () => {
     let task = {
-      _id: null,
+      id: null,
       title: "",
       deadline: "",
       isCompleted: false,
@@ -64,7 +64,7 @@ class TaskService {
     let taskId = 0;
 
     const foundTaskId = (taskId) => {
-      return this.tasks.find((t) => t._id === taskId);
+      return this.tasks.find((t) => t.id === taskId);
     };
 
     do {

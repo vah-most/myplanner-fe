@@ -32,10 +32,10 @@ const AppTaskEditor = ({
 
   useEffect(() => {
     setValues(task);
-  }, [task._id]);
+  }, [task.id]);
 
   const handlePropChange = (prop, value) => {
-    if (onChange) onChange(task._id, prop, value);
+    if (onChange) onChange(task.id, prop, value);
 
     let modifiedValues = { ...values };
     modifiedValues[prop] = value;

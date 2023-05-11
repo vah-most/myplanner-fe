@@ -51,7 +51,7 @@ class TaskList extends Component {
       let editingTask = { ...this.state.editingTask };
       const tasks = await taskService.getTasks();
       if (editingTask) {
-        editingTask = tasks.find((t) => t._id === editingTask._id);
+        editingTask = tasks.find((t) => t.id === editingTask.id);
         if (!editingTask) editingTask = {};
       }
       this.setState({ tasks, editingTask });
@@ -80,7 +80,7 @@ class TaskList extends Component {
   handleRequestEdit = (task) => {
     const { tasks } = this.state;
 
-    let editingTask = tasks.find((t) => t._id === task._id);
+    let editingTask = tasks.find((t) => t.id === task.id);
     if (editingTask) {
       editingTask = { ...editingTask };
       this.setState({ editMode: true, editingTask });
@@ -88,7 +88,7 @@ class TaskList extends Component {
   };
 
   handleRequestDelete = (task) => {
-    this.handleTaskDelete(task._id);
+    this.handleTaskDelete(task.id);
   };
 
   handleEditorClose = () => {
@@ -105,11 +105,9 @@ class TaskList extends Component {
 
   saveTask = (task) => {
     let { tasks } = this.state;
-    const taskIndex = task._id
-      ? tasks.findIndex((t) => t._id === task._id)
-      : null;
+    const taskIndex = task.id ? tasks.findIndex((t) => t.id === task.id) : null;
 
-    if (taskIndex === null) task._id = taskService.generateNewTaskId();
+    if (taskIndex === null) task.id = taskService.generateNewTaskId();
 
     const taskErrors = taskService.checkTaskErrors(task);
     if (taskErrors !== null) {
@@ -133,14 +131,14 @@ class TaskList extends Component {
   handleTaskDelete = (id) => {
     let tasks = [...this.state.tasks];
 
-    tasks = tasks.filter((t) => t._id !== id);
+    tasks = tasks.filter((t) => t.id !== id);
 
     this.saveTaskListChanges(tasks);
   };
 
   handleTaskCompleted = (id, value) => {
     let { tasks } = this.state;
-    const taskIndex = tasks.findIndex((t) => t._id === id);
+    const taskIndex = tasks.findIndex((t) => t.id === id);
     tasks = [...tasks];
 
     if (taskIndex < 0) return;
@@ -252,10 +250,10 @@ class TaskList extends Component {
         cellClassName: "text-center col-1",
         renderFunc: (task) => (
           <TaskListItemCompleted
-            taskId={task._id}
+            taskId={task.id}
             value={task.isCompleted}
             onChange={() =>
-              this.handleTaskCompleted(task._id, !task.isCompleted)
+              this.handleTaskCompleted(task.id, !task.isCompleted)
             }
           />
         ),
@@ -278,7 +276,7 @@ class TaskList extends Component {
     const sortedTasks = this.sortTasks(tasks);
     const data = sortedTasks.map((task) => {
       return {
-        id: task._id,
+        id: task.id,
         info: {
           title: task.title ? task.title : "",
           desc: task.desc ? task.desc : "",
